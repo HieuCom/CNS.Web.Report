@@ -1,0 +1,47 @@
+﻿{
+  "PSCTForm": {
+    "ColumnInfo": {
+      "DIEN_GIAI": {
+        "Name": "DIEN_GIAI",
+        "Caption": "Tên hàng",
+        "Width": 40,
+        "Enabled": true,
+        "type": "string",
+        "edit": true
+      },
+      "SL_TON": {
+        "Name": "SL_TON",
+        "Caption": "Lượng tồn",
+        "Width": 15,
+        "Format": "#,##0.##;(#,##0.##);#",
+        "Enabled": true,
+        "type": "number",
+        "edit": false
+      },
+      "SO_LUONG": {
+        "Name": "SO_LUONG",
+        "Caption": "Số lượng",
+        "Width": 15,
+        "Format": "#,###.###",
+        "type": "number",
+        "edit": true
+      },
+      "GIA": {
+        "Name": "GIA",
+        "Caption": "Đơn giá",
+        "Width": 15,
+        "Format": "#,###.###",
+        "type": "number",
+        "edit": false
+      },
+      "TIEN": {
+        "Name": "TIEN",
+        "Caption": "Thành tiền",
+        "Width": 15,
+        "Format": "#,###.###",
+        "type": "number",
+        "edit": false
+      }
+    }
+  }
+}
