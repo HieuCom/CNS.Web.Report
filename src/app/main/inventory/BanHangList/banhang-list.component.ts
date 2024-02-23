@@ -56,7 +56,6 @@ export class BanHangListComponent implements OnInit {
     let data = [];
     data.push(
       "@TU_NGAY", this.fromDate,
-      // "@TU_NGAY", '20230501',
       "@DEN_NGAY", this.toDate,
       "@ID_LOAI_CT", 21,
       "@ID_KHO", 0,
@@ -75,8 +74,7 @@ export class BanHangListComponent implements OnInit {
     await this.dataService.post('/commands/paged', params).subscribe((response: any) => {
       if (response.Data) {
         this.banhangs = response.Data;
-        this.totalRow = response.TotalItems;
-        this.checkedAll = false;
+        this.totalRow = response.Data[0].TotalItems
       }
     });
   }
@@ -131,10 +129,14 @@ export class BanHangListComponent implements OnInit {
   }
 
   deleteItemConfirm(id: any) {
-    this.dataService.delete('/banhangs/' + id).subscribe((response: Response) => {
-      this._notificationService.printSuccessMessage(MessageContstants.DELETED_OK_MSG);
-      this.loadData();
-    });
+    let data = [];
+        data.push("@ID_PS", id);
+        let params = { "CommandText": "uspbit2PSHangHoa___DeleteHierarchy", "CommandType": 1025, "Parameters": data }
+        this.dataService.post('/commands', params).subscribe((response: any) => {
+          this._notificationService.printSuccessMessage(MessageContstants.DELETED_OK_MSG);
+          this.loadData();
+        }, error => this.dataService.handleError(error));
+
   }
 
   public columnInfobanhang: any[] = [
@@ -197,18 +199,6 @@ export class BanHangListComponent implements OnInit {
       "Caption": "Diễn giải",
       "Format": "",
       "Width": 250
-    },
-    {
-      "Name": "NGAY_LAP",
-      "Caption": "Ngày lập",
-      "Width": 70,
-      "Format": "d"
-    },
-    {
-      "Name": "NGUOI_LAP",
-      "Caption": "Người lập",
-      "Format": "",
-      "Width": 90,
     },
     {
       "Name": "NGAY_SUA",

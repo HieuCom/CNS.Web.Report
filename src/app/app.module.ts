@@ -22,6 +22,7 @@ import { DatePipe } from '@angular/common';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { UploadService } from './core/services/upload.service';
 import { ThemeTogglerService } from './core/services/theme.service';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ThemeTogglerService } from './core/services/theme.service';
     TabsModule.forRoot(),
     EditorModule,
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,    
+    TypeaheadModule.forRoot(),
   ],
   providers: [
     AuthGuard,

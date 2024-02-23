@@ -19,7 +19,9 @@ import { inventoryRouter } from './Inventory.routes';
 import { CommonpipeModule } from '../pipe/commonpipe.module';
 import { NhapKhoComponent } from './NhapKho/nhapkho.component';
 import { NhapKhoListComponent } from './NhapKhoList/nhapkho-list.component';
-
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { SelectTonKhoComponent } from './SelectTonKho/selecttonkho.component';
+import { TheoDoiChungTuComponent } from './TheoDoiChungTu/theodoichungtu.component';
 
 @NgModule({
   imports: [
@@ -34,14 +36,16 @@ import { NhapKhoListComponent } from './NhapKhoList/nhapkho-list.component';
     EditorModule,
     BsDatepickerModule.forRoot(),
     ProgressbarModule.forRoot(),
-    CommonpipeModule
-
+    CommonpipeModule,
+    TypeaheadModule.forRoot(),
   ],
   declarations: [
     BanHangListComponent,
     BanHangComponent,
     NhapKhoComponent,
-    NhapKhoListComponent
+    NhapKhoListComponent,
+    SelectTonKhoComponent,
+    TheoDoiChungTuComponent
     // SimpleTinyComponent
   ],
   providers: [

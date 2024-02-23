@@ -1,47 +1,37 @@
 <div class="x_title">
-  <h3><i class="fa fa-tasks"></i> {{"Danh sách chứng từ xuất" }}</h3>
+  <h3><i class="fa fa-tasks"></i> {{"Theo dõi đơn hàng" }}</h3>
 </div>
 <br>
 
 <div class="panel-filter">
   <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12 form-group">
-      <div class="col-md-5 col-sm-6 col-xs-12 form-group label-created-date">
-        <p for="">{{'task_manager_task_date' | translate}}</p>
-      </div>
       <div class="col-md-10 col-sm-6 col-xs-12 form-group">
         <div class="col-md-7 col-sm-6 col-xs-12 form-group">
           <input type="text" placeholder="{{'FromDate| translate'}}" class="media" bsDatepicker
             [(ngModel)]="this.fromDate"
             [bsConfig]="{rangeInputFormat: 'DD/MM/YYYY', dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
-          <!-- (bsValueChange)="onValueChangeDateRange($event)"> -->
         </div>
         <div class="col-md-7 col-sm-6 col-xs-12 form-group">
           <input type="text" placeholder="{{'ToDate| translate'}}" class="media" bsDatepicker [(ngModel)]="this.toDate"
             [bsConfig]="{rangeInputFormat: 'DD/MM/YYYY', dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
-          <!-- (bsValueChange)="onValueChangeDateRange2($event)" -->
         </div>
       </div>
     </div>
     <div>
-      <div class="col-md-4 col-sm-6 col-xs-12 form-group panel-search">
-        <button class="btn btn-primary" type="button" (click)="reloaddata()"><span class="glyphicon glyphicon-search"
-            aria-hidden="true"></span></button>
+      <div class="col-md-4 col-sm-6 col-xs-12 form-group panel-search">        
+        <button class="btn btn-primary" type="button" (click)="reloaddata()"><span
+            class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
       </div>
     </div>
   </div>
 </div>
 <hr>
-<div class="btn-add-new">
-  <button class="btn btn-primary" type="button" (click)="showCreatebanhangModel()"><span
-      class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{'add_new'| translate}}</button>
-</div>
-
 <div class="table-responsive">
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th *ngFor="let colInfo of columnInfobanhang ">
+        <th *ngFor="let colInfo of columnInfochungtu ">
           <div [style.width.px]="colInfo.Width">
             {{colInfo.Caption}}
           </div>
@@ -49,27 +39,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let banhang of banhangs ; let i = index" class="select-item">
-        <td *ngFor="let colInfo of columnInfobanhang">
-          <span *ngIf="colInfo.Format == 'd' ">{{banhang[colInfo.Name] | date:
+      <tr *ngFor="let chungtu of chungtus ; let i = index" class="select-item">
+        <td *ngFor="let colInfo of columnInfochungtu">
+          <span *ngIf="colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:
             'dd/MM/yyyy'}}</span>
-          <span *ngIf="colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{banhang[colInfo.Name]
+          <span *ngIf="colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{chungtu[colInfo.Name]
             |number }}</span>
-          <span *ngIf="colInfo.Format == '' ">{{banhang[colInfo.Name] }}</span>
+          <span *ngIf="colInfo.Format == '' ">{{chungtu[colInfo.Name] }}</span>
         </td>
-        <td> <button class="action-delete-task" (click)="showEditModal(banhang.ID_PS)"><i
-              class="fa fa-pencil-square-o"></i></button> </td>
-        <td><button class="action-delete-task" (click)="deleteItem(banhang.ID_PS)"><i class="fa fa-trash"></i></button>
       </tr>
     </tbody>
   </table>
-  <div *ngIf="banhangs && banhangs.length == 0" class="col-md-12">
+  <div *ngIf="chungtus && chungtus.length == 0" class="col-md-12">
     <div class="alert alert-info">
       <strong>{{'dialog_alert_title'| translate }}!</strong> {{'task_manager_task_notice_list_empty'| translate }}
     </div>
 
   </div>
-  <div *ngIf="banhangs && banhangs.length > 0" class="col-md-12">
+  <div *ngIf="chungtus && chungtus.length > 0" class="col-md-12">
     <div class="col-md-8">
       <pagination [boundaryLinks]="true" [itemsPerPage]="pageSize" (pageChanged)="pageChanged($event)"
         [totalItems]="totalRow" [(ngModel)]="pageNumber" class="pagination-sm" previousText="&lsaquo;"

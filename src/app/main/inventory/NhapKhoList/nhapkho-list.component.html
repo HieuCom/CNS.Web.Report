@@ -49,7 +49,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let nhapkho of nhapkhos ; let i = index" class="select-item" (click)="showEditModal(nhapkho.ID_PS)">
+      <tr *ngFor="let nhapkho of nhapkhos ; let i = index" class="select-item">
         <td *ngFor="let colInfo of columnInfonhapkho">
           <span *ngIf="colInfo.Format == 'd' ">{{nhapkho[colInfo.Name] | date:
             'dd/MM/yyyy'}}</span>
@@ -57,11 +57,13 @@
             |number }}</span>
           <span *ngIf="colInfo.Format == '' ">{{nhapkho[colInfo.Name] }}</span>
         </td>
-        <!-- <td>
-          <button class="action-delete-task" (click)="deleteItem(nhapkho.ID_PS)"><i class="fa fa-trash"></i></button>
-        </td> -->
+        <td> <button class="action-delete-task" (click)="showEditModal(nhapkho.ID_PS)"><i
+              class="fa fa-pencil-square-o"></i></button> </td>
+        <td><button class="action-delete-task" (click)="deleteItem(nhapkho.ID_PS)"><i class="fa fa-trash"></i></button>
+        </td>
       </tr>
     </tbody>
+
   </table>
   <div *ngIf="nhapkhos && nhapkhos.length == 0" class="col-md-12">
     <div class="alert alert-info">

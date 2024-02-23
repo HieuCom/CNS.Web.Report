@@ -1,12 +1,15 @@
 import { Component, ElementRef, EventEmitter, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageContstants } from 'src/app/core/common/message.constants';
 import { FormErrors } from 'src/app/core/helpers/form.errors';
 import { AuthenService } from 'src/app/core/services/authen.service';
 import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import PSCTJSON from 'src/assets/json/PSCTForm.json';
+import { SelectTonKhoComponent } from '../SelectTonKho/selecttonkho.component';
+import { setDate } from 'ngx-bootstrap/chronos/utils/date-setters';
+import { getDate } from 'ngx-bootstrap/chronos/utils/date-getters';
 
 @Component({
   selector: 'app-BanHang',
@@ -33,6 +36,8 @@ export class BanHangComponent implements OnInit {
   }
   PSTH: any = {};
   PSCT: any[] = [];
+  PSCTRemove: any[] = [];
+  TonKhoDichDanh: any[] = [];
   descriptionTask: string;
   public event: EventEmitter<any> = new EventEmitter();
   bsValue = new Date();
@@ -41,30 +46,36 @@ export class BanHangComponent implements OnInit {
   progressing: number = 0;
   userLoginId: any;
   userList: any;
+  user: any;
   khoList: any;
   tienteList: any;
   doituongList: any;
-
+  Ngay_CT: Date = new Date();
   PSCTColumn = PSCTJSON.PSCTForm.ColumnInfo;
 
   constructor(public bsModalRef: BsModalRef,
+    public bsModalRefTonKho: BsModalRef,
     private notificationService: NotificationService,
     private _authenService: AuthenService,
     private formBuilder: FormBuilder,
     private formErrors: FormErrors,
+    private modalService: BsModalService,
     private dataService: DataService,) {
     this.initForm();
   }
-
+  public toDay: Date = new Date();
   ngOnInit(): void {
-    var user = this._authenService.getLoggedInUser();
-    this.getUserIdLogin(user.username);
-    this.getListUser();
+    this.user = this._authenService.getLoggedInUser();
+    this.getUserIdLogin(this.user.username);
     this.getListKho();
     this.getListTT();
     this.getListDT();
     if (this.id) {
       this.getChungTu();
+    }
+    else {
+      this.toDay.setDate
+      this.PSTH.NGAY_CT = this.toDay;
     }
   }
   async getUserIdLogin(userName) {
@@ -78,17 +89,6 @@ export class BanHangComponent implements OnInit {
         }
       });
     }
-  }
-
-  async getListUser() {
-    // let data = [];
-    // data.push("@ActivatedOnly", 1);
-    // let params = { "CommandText": "uspUser___Fill", "CommandType": 1025, "Parameters": data }
-    // this.dataService.post('/commands', params).subscribe((response: any) => {
-    //   if (response.Data) {
-    //     this.userList = response.Data;
-    //   }
-    // });
   }
 
   async getListKho() {
@@ -108,7 +108,7 @@ export class BanHangComponent implements OnInit {
   }
 
   async getListDT() {
-    await this.dataService.get('/DoiTuong').subscribe((response: any) => {
+    await this.dataService.get('/DoiTuong?sort=TEN_DT').subscribe((response: any) => {
       if (response) {
         this.doituongList = response;
       }
@@ -120,6 +120,7 @@ export class BanHangComponent implements OnInit {
       ID_PS: ['', Validators.required],
       SO_CT: ['', Validators.required],
       NGAY_CT: ['', Validators.required],
+      NGAY_GHANG: ['', Validators.required],
       ID_TT: ['', Validators.required],
       MA_DT: [''],
       TY_GIA: ['', Validators.required],
@@ -148,14 +149,29 @@ export class BanHangComponent implements OnInit {
   }
 
   onSubmit(PSTH: any, PSCT: any) {
+    //Xoá PSCT có trong PSCTRemove
+    if (this.PSCTRemove.length > 0) {
+      this.PSCTRemove.forEach(item => {
+        let dataRemove = [];
+        dataRemove.push(
+          "@ID_PSCT", item.ID_PSCT
+        )
+        let paramsRemove = { "CommandText": "spDeletebit2pshanghoasub1", "CommandType": 1025, "Parameters": dataRemove }
+        this.dataService.post('/commands', paramsRemove).subscribe((response: any) => {
+        },
+          error => this.dataService.handleError(error)
+        );
+      })
+    }
+
     // Lưu Index để lấy ID_PS
     let dataIndex = [];
     dataIndex.push(
-      "@ID_PS", 708602,
+      "@ID_PS", PSTH.ID_PS,
       "@ID_BP", 0,
       "@ID_DV", 1,
-      "@USER_UPD", 1,
-      "@USER_ID", 1,
+      "@USER_UPD", this.userLoginId,
+      "@USER_ID", this.userLoginId,
     )
 
     let params = { "CommandText": "spSavebit2Indexs", "CommandType": 1025, "Parameters": dataIndex }
@@ -227,16 +243,18 @@ export class BanHangComponent implements OnInit {
           "@ID_PSHD", PSTH.ID_PSHD,
           "@SO_HDONG", PSTH.SO_HDONG,
           "@NGAY_HDONG", PSTH.NGAY_HDONG,
-          "@DA_TT", PSTH.DA_TT,
+          "@DA_TT", 0,
           "@CO_VAT", PSTH.CO_VAT,
           "@TAO_HDON", PSTH.TAO_HDON,
-          "@NHAP", false,
-          "@CHOT", PSTH.CHOT,
+          "@NHAP", 0,
+          "@CHOT", 0,
           "@CNSrID", PSTH.CNSrID,
           "@Attachments", PSTH.Attachments,
           "@TransStatus", PSTH.TransStatus,
           "@LinkedId", PSTH.LinkedId,
-          "@ChangedBy", this.userLoginId,
+          "@ChangedOn", this.toDay.getDate,
+          "@ChangedBy", this.user.username,
+          "@CreatedBy", this.user.username,
         );
         //Lưu PSTH lấy ID_PS
         params = { "CommandText": "spSavebit2PSHangHoaMain", "CommandType": 1025, "Parameters": dataPSTH }
@@ -313,21 +331,18 @@ export class BanHangComponent implements OnInit {
                   "@DA_TT", item.DA_TT,
                   "@NHAP", false,
                   "@LinkedId", item.LinkedId,
+                  "@SL_YEUCAU", item.SL_YEUCAU
                 );
                 let params = { "CommandText": "spSavebit2PSHangHoaSub1", "CommandType": 1025, "Parameters": dataPSCT }
                 this.dataService.post('/commands', params).subscribe((response: any) => {
-                  if (response.ID_PSCT) {
-                    this.notificationService.printSuccessMessage(MessageContstants.UPDATED_OK_MSG);
-                  } else {
-                    this.notificationService.printSuccessMessage(MessageContstants.CREATED_OK_MSG);
-                  }
+                  if (response.Data) { }
+
                 },
                   error => this.dataService.handleError(error)
                 );
               }
               );
             }
-            this.notificationService.printSuccessMessage("Lưu thành công");
           }
         },
           error => this.dataService.handleError(error)
@@ -352,6 +367,7 @@ export class BanHangComponent implements OnInit {
     let params = { "CommandText": "spLoadPSHHMain", "CommandType": 1025, "Parameters": data }
     await this.dataService.post('/commands', params).subscribe((response: any) => {
       this.PSTH = response.Data[0];
+      this.fillFormData(response.Data[0]);
       this.ConverDoiTuong(this.PSTH.ID_DT)
       this.ConverKho(this.PSTH.ID_KHO)
       this.ConverTienTe(this.PSTH.ID_TT)
@@ -361,6 +377,18 @@ export class BanHangComponent implements OnInit {
     await this.dataService.post('/commands', params).subscribe((response: any) => {
       this.PSCT = response.Data;
     });
+  }
+
+  private fillFormData(data: any) {
+    if (data) {
+      Object.keys(this.PSTHModel.controls).forEach(key => {
+        if (key === 'NGAY_CT') {
+          this.PSTHModel.controls[key].setValue(data[key] ? new Date(data[key]) : '');
+        } else {
+          this.PSTHModel.controls[key].setValue(data[key] ? data[key] : '');
+        }
+      });
+    }
   }
 
   async ConverDoiTuong(ID_DT: any) {
@@ -380,6 +408,7 @@ export class BanHangComponent implements OnInit {
         if (response) {
           this.PSTHModel.controls.MA_KHO.setValue(response.MA_KHO);
           this.PSTHModel.controls.TEN_KHO.setValue(response.TEN_KHO);
+          // this.loadTonDichDanhPSCT(this.PSTH)
         }
       });
     }
@@ -396,6 +425,23 @@ export class BanHangComponent implements OnInit {
   onCreate(): void {
     this.PSCT.push({ noQuestion: 0 });
   }
+  onRemove(index: any, item: any) {
+    this.PSCT.splice(index, 1);
+    if (item.ID_PSCT > 0) {
+      this.PSCTRemove.push(item);
+    }
+  }
+  async loadTonDichDanhPSCT() {
+    let PSTH = this.PSTH
+    this.bsModalRefTonKho = this.modalService.show(SelectTonKhoComponent, { initialState: { PSTH }, class: 'modal-lg' });
 
+    this.bsModalRefTonKho.content.event.subscribe(res => {
+      this.TonKhoDichDanh = res.SelectTonKho
+      this.TonKhoDichDanh.length
+      this.TonKhoDichDanh.forEach(item => {
+        this.PSCT.push({ DIEN_GIAI: item.DIEN_GIAI, SL_TON: item.SL_TON, SO_LUONG: item.SO_LUONG_GUI, GIA: item.GIA, ID_PSCT_ORDER: item.ID_PSCT_ORDER })
+      })
+    });
+  }
 }
 

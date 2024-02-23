@@ -7,6 +7,8 @@ import { AuthenService } from 'src/app/core/services/authen.service';
 import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import PSCTJSON from 'src/assets/json/PSCTForm.json';
+import { map, mergeMap } from 'rxjs/operators';
+import { getDate } from 'ngx-bootstrap/chronos/utils/date-getters';
 
 @Component({
   selector: 'nhapkho',
@@ -33,6 +35,7 @@ export class NhapKhoComponent implements OnInit {
   }
   PSTH: any = {};
   PSCT: any[] = [];
+  PSCTRemove: any[] = [];
   descriptionTask: string;
   public event: EventEmitter<any> = new EventEmitter();
   bsValue = new Date();
@@ -44,8 +47,12 @@ export class NhapKhoComponent implements OnInit {
   khoList: any;
   tienteList: any;
   doituongList: any;
-
+  ID_DT: number;
   PSCTColumn = PSCTJSON.PSCTForm.ColumnInfo;
+  peoples: any[] = [];
+  keywordPeople: string;
+  toDay: Date = new Date();
+  user: any;
 
   constructor(public bsModalRef: BsModalRef,
     private notificationService: NotificationService,
@@ -57,18 +64,17 @@ export class NhapKhoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var user = this._authenService.getLoggedInUser();
-    this.getUserIdLogin(user.username);
+    this.user = this._authenService.getLoggedInUser();
+    this.getUserIdLogin(this.user.username);
     this.getListKho();
     this.getListTT();
     this.getListDT();
     if (this.id) {
       this.getChungTu();
     }
-    else{
-      // set ngày ct = today
-      let today = new Date();
-      this.itemForm.controls['NGAY_CT'].setValue(today);
+    else {
+      this.toDay.setDate
+      this.PSTH.NGAY_CT = this.toDay;
     }
   }
   async getUserIdLogin(userName) {
@@ -101,7 +107,7 @@ export class NhapKhoComponent implements OnInit {
   }
 
   async getListDT() {
-    await this.dataService.get('/DoiTuong').subscribe((response: any) => {
+    await this.dataService.get('/DoiTuong?sort=TEN_DT').subscribe((response: any) => {
       if (response) {
         this.doituongList = response;
       }
@@ -112,6 +118,7 @@ export class NhapKhoComponent implements OnInit {
     this.itemForm = this.formBuilder.group({
       SO_CT: ['', Validators.required],
       NGAY_CT: [new Date(), Validators.required],
+      NGAY_PHIEU: [new Date(), Validators.required],
       ID_TT: [''],
       MA_DT: [''],
       TY_GIA: [''],
@@ -142,6 +149,21 @@ export class NhapKhoComponent implements OnInit {
   }
 
   onSubmit(PSTH: any, PSCT: any) {
+    //Xoá PSCT có trong PSCTRemove
+    if (this.PSCTRemove.length > 0) {
+      this.PSCTRemove.forEach(item => {
+        let dataRemove = [];
+        dataRemove.push(
+          "@ID_PSCT", item.ID_PSCT
+        )
+        let paramsRemove = { "CommandText": "spDeletebit2pshanghoasub1", "CommandType": 1025, "Parameters": dataRemove }
+        this.dataService.post('/commands', paramsRemove).subscribe((response: any) => {
+        },
+          error => this.dataService.handleError(error)
+        );
+      })
+    }
+
     // Lưu Index để lấy ID_PS
     let dataIndex = [];
     dataIndex.push(
@@ -160,7 +182,7 @@ export class NhapKhoComponent implements OnInit {
           "@ID_PS", PSTH.ID_PS,
           "@SO_CT", PSTH.SO_CT,
           "@NGAY_CT", PSTH.NGAY_CT,
-          "@ID_LOAI_CT", 21,
+          "@ID_LOAI_CT", 11,
           "@ID_PS_ORDER", PSTH.ID_PS_ORDER,
           "@ID_DV", PSTH.ID_DV,
           "@ID_DT", PSTH.ID_DT,
@@ -228,7 +250,10 @@ export class NhapKhoComponent implements OnInit {
           "@Attachments", PSTH.Attachments,
           "@TransStatus", PSTH.TransStatus,
           "@LinkedId", PSTH.LinkedId,
-          "@ChangedBy", this.userLoginId,
+          "@ChangedOn", this.toDay,
+          "@ChangedBy", this.user.username,
+          "@CreatedBy", this.user.username,
+
         );
         //Lưu PSTH 
         params = { "CommandText": "spSavebit2PSHangHoaMain", "CommandType": 1025, "Parameters": dataPSTH }
@@ -305,6 +330,7 @@ export class NhapKhoComponent implements OnInit {
                   "@DA_TT", item.DA_TT,
                   "@NHAP", true,
                   "@LinkedId", item.LinkedId,
+                  "@SL_YEUCAU",item.SL_YEUCAU
                 );
                 let params = { "CommandText": "spSavebit2PSHangHoaSub1", "CommandType": 1025, "Parameters": dataPSCT }
                 this.dataService.post('/commands', params).subscribe((response: any) => {
@@ -362,6 +388,7 @@ export class NhapKhoComponent implements OnInit {
       });
     }
   }
+
   async ConverDoiTuong(ID_DT: any) {
     if (ID_DT) {
       await this.dataService.get('/DoiTuong/' + ID_DT).subscribe((response: any) => {
@@ -395,6 +422,11 @@ export class NhapKhoComponent implements OnInit {
   onCreate(): void {
     this.PSCT.push({ noQuestion: 0 });
   }
-
+  onRemove(index: any, item: any) {
+    this.PSCT.splice(index, 1);
+    if (item.ID_PSCT > 0) {
+      this.PSCTRemove.push(item);
+    }
+  }
 }
 

@@ -8,16 +8,17 @@
     <!-- Display PSTH -->
     <form class="form-horizontal form-label-left input_mask" [formGroup]="itemForm" autocomplete="off">
         <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-xs-12" style="width:25%">
                 <div>
                     <p><strong>{{"Số Chứng từ" }}</strong></p>
                     <div>
-                        <input type="text" class="form-control" formControlName="SO_CT" [(ngModel)]="PSTH.SO_CT" />
+                        <input type="text" required minlength="3" class="form-control" formControlName="SO_CT"
+                            [(ngModel)]="PSTH.SO_CT" />
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="col-xs-12" style="width:25%">
                 <div class="form-group">
                     <p><strong>{{"Ngày Chứng từ" }}</strong></p>
                     <div>
@@ -27,10 +28,32 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-xs-12" style="width:25%">
+                <div class="form-group">
+                    <p><strong>{{"Loại Tiền" }}</strong></p>
+
+                    <div>
+                        <select class="form-control" formControlName="ID_TT" [(ngModel)]="PSTH.ID_TT">
+                            <option *ngFor="let item of tienteList" [value]="item.ID_TT">{{item.MA_TT}}</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12" style="width:25%">
+                <div class="form-group">
+                    <p><strong>{{"Tỷ giá" }}</strong></p>
+                    <div>
+                        <input type="text" required minlength="3" formControlName="TY_GIA" class="form-control" />
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <p><strong>{{"Người giao hàng" }}</strong></p>
                     <div>
@@ -38,19 +61,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-xs-12">
                 <div class="form-group">
                     <p><strong>{{"Địa chỉ" }}</strong></p>
                     <div>
                         <input type="text" formControlName="DIA_CHI" [(ngModel)]="PSTH.DIA_CHI" class="form-control" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="form-group">
-                    <p><strong>{{"MS Thuế" }}</strong></p>
-                    <div>
-                        <input type="text" formControlName="MS_THUE" [(ngModel)]="PSTH.MS_THUE" class="form-control" />
                     </div>
                 </div>
             </div>
@@ -63,7 +78,7 @@
                     <div>
                         <select class="form-control" formControlName="ID_DT" [(ngModel)]="PSTH.ID_DT"
                             (change)="ConverDoiTuong(PSTH.ID_DT)">
-                            <option *ngFor="let item of doituongList" [value]="item.ID_DT">{{item.MA_DT}}</option>
+                            <option *ngFor="let item of doituongList" [value]="item.ID_DT">{{item.TEN_DT}}</option>
                         </select>
                     </div>
                 </div>
@@ -90,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12" style="width: 70%;">
+            <div class="col-xs-12" style="width: 70%">
                 <div class="form-group">
                     <p><strong>{{"Tên kho" }}</strong></p>
                     <div>
@@ -101,7 +116,17 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12" style="width:30%">
+                <div class="form-group">
+                    <p><strong>{{"Ngày nhập kho" }}</strong></p>
+                    <div>
+                        <input type="text" formControlName="NGAY_PHIEU" class="form-control" bsDatepicker
+                            [(ngModel)]="PSTH.NGAY_PHIEU"
+                            [bsConfig]="{rangeInputFormat: 'DD/MM/YYYY', dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12" style="width:70%">
                 <div class="form-group">
                     <p><strong>{{"Diễn giải" }}</strong></p>
                     <div>
@@ -110,6 +135,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </form>
 
@@ -138,6 +164,7 @@
                     <input *ngIf="column.obj.type == 'number' && column.obj.edit" [(ngModel)]="item[column.key]"
                         type="number" [style.width.%]="100" required>
                 </td>
+                <td><button type="button" class="btn btn-default" (click)="onRemove(i,item)">Xoá</button></td>
             </tr>
         </tbody>
     </table>

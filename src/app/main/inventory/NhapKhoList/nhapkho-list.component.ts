@@ -41,7 +41,7 @@ export class NhapKhoListComponent implements OnInit {
     data.push(
       "@TU_NGAY", this.fromDate,
       "@DEN_NGAY", this.toDate,
-      "@ID_LOAI_CT", 21,
+      "@ID_LOAI_CT", 11,
       "@ID_KHO", 0,
       "@ID_KHO_NHAN", 0,
       "@ID_DV", 1,
@@ -108,12 +108,17 @@ export class NhapKhoListComponent implements OnInit {
   }
 
   deleteItemConfirm(id: any) {
-    this.dataService.delete('/nhapkhos/' + id).subscribe((response: Response) => {
-      this._notificationService.printSuccessMessage(MessageContstants.DELETED_OK_MSG);
-      this.loadData();
-    });
+    let data = [];
+        data.push("@ID_PS", id);
+        let params = { "CommandText": "uspbit2PSHangHoa___DeleteHierarchy", "CommandType": 1025, "Parameters": data }
+        this.dataService.post('/commands', params).subscribe((response: any) => {
+          this._notificationService.printSuccessMessage(MessageContstants.DELETED_OK_MSG);
+          this.loadData();
+        }, error => this.dataService.handleError(error));
+
   }
 
+  
   public columnInfonhapkho: any[] = [
     {
       "Name": "NGAY_CT",
@@ -174,18 +179,6 @@ export class NhapKhoListComponent implements OnInit {
       "Caption": "Diễn giải",
       "Format": "",
       "Width": 250
-    },
-    {
-      "Name": "NGAY_LAP",
-      "Caption": "Ngày lập",
-      "Width": 70,
-      "Format": "d"
-    },
-    {
-      "Name": "NGUOI_LAP",
-      "Caption": "Người lập",
-      "Format": "",
-      "Width": 90,
     },
     {
       "Name": "NGAY_SUA",

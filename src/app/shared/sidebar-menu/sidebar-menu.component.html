@@ -5,15 +5,14 @@
       <!-- <li><a routerLink="/main/dashboard" routerLinkActive="active"><i class="fa fa-dashboard"></i> {{'dash_board' | translate}}</a></li> -->
       <li><a routerLink="" routerLinkActive="active"><i class="fa fa-dashboard"></i> {{'dash_board' | translate}}</a>
       </li>
-      <!-- <li><a routerLink="/main/task/alcTaskItem" routerLinkActive="active"><i class="fa fa-file-text"></i> Mục việc chưa khởi tạo</a></li> -->
-      <!-- <li><a routerLink="/main/task" routerLinkActive="active"><i class="fa fa-tasks"></i> Danh sách công việc</a></li> -->
-      <!-- <li><a routerLink="/main/task/todoTemplateList" routerLinkActive="active"><i class="fa fa-credit-card"></i> Định nghĩa công việc</a></li> -->
-      <!-- <li *ngFor="let item of functions"><a> <i [ngClass]="item.IconAwesome === null ? 'fa fa-spinner' : 'fa ' + item.IconAwesome"></i> {{item.Name}} <span *ngIf="item.ChildFunctions.length>0" class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-          <li *ngFor="let subItem of item.ChildFunctions"><a routerLink="{{subItem.Url}}" routerLinkActive="active">{{subItem.Name}}</a></li>
-        </ul>
-      </li> -->
-      <li><a routerLink="inventory/nhapkho" routerLinkActive="active">Phiếu nhập hàng</a></li>
+
+      <li *ngIf="userLevel < 3"><a routerLink="inventory/nhapkho" routerLinkActive="active">Phiếu nhập hàng</a></li>
+      <li *ngIf="userLevel < 3"><a routerLink="inventory/banhang" routerLinkActive="active">Phiếu xuất hàng</a></li>
+      <li *ngIf="userLevel >= 3"> <a routerLink="inventory/baocao" routerLinkActive="active">Theo dõi đơn hàng</a> </li>
+
+      <!-- <li ><a routerLink="inventory/nhapkho" routerLinkActive="active">Phiếu nhập hàng</a></li>
+      <li ><a routerLink="inventory/banhang" routerLinkActive="active">Phiếu xuất hàng</a></li>
+      <li> <a routerLink="inventory/baocao" routerLinkActive="active">Theo dõi đơn hàng</a> </li> -->
       <!-- <li><a> <i [ngClass]=""></i> Danh mục hệ thống <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a routerLink="inventory/banhang" routerLinkActive="active">Phiếu xuất hàng</a></li> 

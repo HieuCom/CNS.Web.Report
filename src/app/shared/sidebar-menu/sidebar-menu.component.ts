@@ -10,71 +10,24 @@ import { SystemConstants } from '../../core/common/system.constants';
 })
 export class SidebarMenuComponent implements OnInit {
   public functions: any[];
+  public userLevel: any;
   constructor(private authenService: AuthenService, private dataService: DataService) { }
 
   ngOnInit() {
-    // const user = this.authenService.getLoggedInUser();
+    const user = this.authenService.getLoggedInUser();
+    let data = [];
+      data.push("@UserName",  user.username);
+      let params = { "CommandText": "uspUser___FindUserName", "CommandType": 1025, "Parameters": data }
+       this.dataService.post('/commands', params).subscribe((response: any) => {
+        if (response.Data) {
+          this.userLevel = response.Data[0].Level;
+        }
+      });
     // const params = { '@UserName': user.username, '@OrganizationId': user.orgCurrentId };
     // this.dataService.submit('/auth/accounts/GetUserRightFunctions', params).subscribe((result: any) => {
+    //   let url = "/auth/accounts?filter=UserName='"+user.username+"'"
+    //   this.dataService.post(url).subscribe((result: any) => {
     //   this.functions = result;
     // }, error => this.dataService.handleError(error));
   }
-
 }
-
-// functions = [
-//   {
-//     "ID": "TASK",
-//     "Name": "Quản lý công việc",
-//     "Url": "/",
-//     "DisplayOrder": 4,
-//     "ParentId": null,
-//     "Parent": null,
-//     "ChildFunctions": [
-//       {
-//         "ID": "ALC_TASK_LIST",
-//         "Name": "Mục việc chưa khởi tạo",
-//         "Url": "/main/task/alcTaskItem",
-//         "DisplayOrder": 1,
-//         "ParentId": "TASK",
-//         "Parent": {
-//           "ID": "TASK",
-//           "Name": "Quản lý công việc",
-//           "Url": "/",
-//           "DisplayOrder": 4,
-//           "ParentId": null,
-//           "Parent": null,
-//           "ChildFunctions": null,
-//           "Status": true,
-//           "IconAwesome": "fa-tasks"
-//         },
-//         "ChildFunctions": null,
-//         "Status": true,
-//         "IconAwesome": null
-//       },
-//       {
-//         "ID": "TASK_LIST",
-//         "Name": "Danh sách công việc",
-//         "Url": "/main/task",
-//         "DisplayOrder": 2,
-//         "ParentId": "TASK",
-//         "Parent": {
-//           "ID": "TASK",
-//           "Name": "Quản lý công việc",
-//           "Url": "/",
-//           "DisplayOrder": 4,
-//           "ParentId": null,
-//           "Parent": null,
-//           "ChildFunctions": null,
-//           "Status": true,
-//           "IconAwesome": "fa-tasks"
-//         },
-//         "ChildFunctions": null,
-//         "Status": true,
-//         "IconAwesome": null
-//       }
-//     ],
-//     "Status": true,
-//     "IconAwesome": "fa-tasks"
-//   }
-// ]

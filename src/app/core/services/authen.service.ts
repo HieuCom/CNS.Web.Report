@@ -73,7 +73,7 @@ export class AuthenService {
 
     const promise = new Promise((resolve, reject) => {
       this._http.post(environment.BASE_URL + '/auth/token', body, { headers: headers })
-      // this._http.post('http://27.72.62.141:8888/2021' + '/auth/token', body, { headers: headers })
+        // this._http.post('http://27.72.62.141:8888/2021' + '/auth/token', body, { headers: headers })
         .subscribe((response: any) => {
           if (response.access_token) {
             const user = new LoggedInUser(response.access_token,
@@ -128,20 +128,28 @@ export class AuthenService {
       const cachedData = localStorage.getItem(SystemConstants.CURRENT_USER);
       const userData = JSON.parse(cachedData);
       const tokenInfo = jwt_decode(userData.access_token);
-      user = new LoggedInUser(userData.access_token,
-        tokenInfo['userName'],
-        tokenInfo['firstName'] + ' ' + tokenInfo['lastName'],
-        tokenInfo['email'],
-        tokenInfo['avatar'],
-        tokenInfo['role'],
-        tokenInfo['permissions'],
-        tokenInfo['orgCurrentId']);
+      if (this.isTokenExpired(userData.access_token)) {
+        user = null;
+      } else {
+        user = new LoggedInUser(userData.access_token,
+          tokenInfo['userName'],
+          tokenInfo['firstName'] + ' ' + tokenInfo['lastName'],
+          tokenInfo['email'],
+          tokenInfo['avatar'],
+          tokenInfo['role'],
+          tokenInfo['permissions'],
+          tokenInfo['orgCurrentId']);
+      }
     } else {
       user = null;
     }
     return user;
   }
-
+  
+  private isTokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
   getPermissions() {
     const user = this.getLoggedInUser();
     const parms = { '@UserName': user.username, '@OrganizationId': user.orgCurrentId };
