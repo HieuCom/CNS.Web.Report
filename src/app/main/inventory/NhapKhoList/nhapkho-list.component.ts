@@ -26,6 +26,7 @@ export class NhapKhoListComponent implements OnInit {
   public nhapkhos: any[];
 
   bsModalRef: BsModalRef;
+  
   constructor(private dataService: DataService,
     private _notificationService: NotificationService,
     private modalService: BsModalService) { }
@@ -75,6 +76,7 @@ export class NhapKhoListComponent implements OnInit {
       this.loadData();
     }
   }
+  // load using service
   loadnhapkho(id: any) {
     this.bsModalRef = this.modalService.show(NhapKhoComponent, { initialState: { id }, class: 'modal-lg' });
 
@@ -82,6 +84,7 @@ export class NhapKhoListComponent implements OnInit {
       this.loadData();
     });
   }
+
   reloaddata() {
     this.loadData();
   }

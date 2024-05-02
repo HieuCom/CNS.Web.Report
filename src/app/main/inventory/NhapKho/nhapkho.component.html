@@ -120,8 +120,8 @@
                 <div class="form-group">
                     <p><strong>{{"Ngày nhập kho" }}</strong></p>
                     <div>
-                        <input type="text" formControlName="NGAY_PHIEU" class="form-control" bsDatepicker
-                            [(ngModel)]="PSTH.NGAY_PHIEU"
+                        <input type="text" formControlName="CreatedOn" class="form-control" disabled bsDatepicker
+                            [(ngModel)]="PSTH.CreatedOn"
                             [bsConfig]="{rangeInputFormat: 'DD/MM/YYYY', dateInputFormat: 'DD/MM/YYYY', showWeekNumbers: false }">
                     </div>
                 </div>
@@ -148,6 +148,13 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <span>Tổng số lượng : {{getTotalSL(PSCT)}}</span>
+            </tr>
+            <tr>
+                <span>Tổng số KG : {{getTotalKG(PSCT)}}</span>
+            </tr>
+            
             <tr *ngFor="let item of PSCT; let i = index">
                 <td *ngFor="let column of PSCTColumn | jsonToArray">
                     <span *ngIf="column.obj.type != 'date' && !column.obj.edit">{{item[column.key]}}</span>

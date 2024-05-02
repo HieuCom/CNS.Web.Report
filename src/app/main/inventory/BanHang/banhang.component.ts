@@ -75,8 +75,15 @@ export class BanHangComponent implements OnInit {
     }
     else {
       this.toDay.setDate
-      this.PSTH.NGAY_CT = this.toDay;
+      this.toDay = this.getNowUTC();
+      this.PSTH.NGAY_CT = this.toDay
     }
+  }
+
+
+  private getNowUTC() {
+    const now = new Date();
+    return new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
   }
   async getUserIdLogin(userName) {
     if (userName) {
@@ -120,14 +127,14 @@ export class BanHangComponent implements OnInit {
       ID_PS: ['', Validators.required],
       SO_CT: ['', Validators.required],
       NGAY_CT: ['', Validators.required],
-      NGAY_GHANG: ['', Validators.required],
+      CreatedOn: ['', Validators.required],
       ID_TT: ['', Validators.required],
       MA_DT: [''],
       TY_GIA: ['', Validators.required],
       ID_DT: ['', Validators.required],
       MA_TT: [''],
       TEN_DT: [''],
-      ONG_BA: ['', Validators.required],
+      NGUOI_GHANG: ['', Validators.required],
       DIA_CHI: ['', Validators.required],
       MS_THUE: ['', Validators.required],
       ID_KHO: ['', Validators.required],
@@ -177,9 +184,14 @@ export class BanHangComponent implements OnInit {
     let params = { "CommandText": "spSavebit2Indexs", "CommandType": 1025, "Parameters": dataIndex }
     this.dataService.post('/commands', params).subscribe((response: any) => {
       //Lưu PSTH
+
       if (response.Data[0]) {
-        PSTH.ID_PS = response.Data[0].ID_PS
         let dataPSTH = [];
+        if (PSTH.ID_PS === undefined) {
+          PSTH.CreatedOn = this.toDay,
+            PSTH.CreatedBy = this.user.username
+        }
+        PSTH.ID_PS = response.Data[0].ID_PS
         dataPSTH.push(
           "@ID_PS", PSTH.ID_PS,
           "@SO_CT", PSTH.SO_CT,
@@ -252,9 +264,10 @@ export class BanHangComponent implements OnInit {
           "@Attachments", PSTH.Attachments,
           "@TransStatus", PSTH.TransStatus,
           "@LinkedId", PSTH.LinkedId,
-          "@ChangedOn", this.toDay.getDate,
+          "@ChangedOn", this.toDay,
           "@ChangedBy", this.user.username,
-          "@CreatedBy", this.user.username,
+          "@CreatedBy", PSTH.CreatedBy,
+          "@CreatedOn", PSTH.CreatedOn
         );
         //Lưu PSTH lấy ID_PS
         params = { "CommandText": "spSavebit2PSHangHoaMain", "CommandType": 1025, "Parameters": dataPSTH }
@@ -269,7 +282,7 @@ export class BanHangComponent implements OnInit {
                   "@CNSrID", item.CNSrID,
                   "@ID_PS", PSTH.ID_PS,
                   "@ID_PSCT_N", item.ID_PSCT_N,
-                  "@ID_KHO", item.ID_KHO,
+                  "@ID_KHO", PSTH.ID_KHO,
                   "@ID_KHO_NHAN", item.ID_KHO_NHAN,
                   "@CACH_TINH_GIA", item.CACH_TINH_GIA,
                   "@ID_NL", item.ID_NL,
@@ -331,7 +344,8 @@ export class BanHangComponent implements OnInit {
                   "@DA_TT", item.DA_TT,
                   "@NHAP", false,
                   "@LinkedId", item.LinkedId,
-                  "@SL_YEUCAU", item.SL_YEUCAU
+                  "@SL_YEUCAU", item.SL_YEUCAU,
+                  "@ID_PSCT_ORDER", item.ID_PSCT_ORDER
                 );
                 let params = { "CommandText": "spSavebit2PSHangHoaSub1", "CommandType": 1025, "Parameters": dataPSCT }
                 this.dataService.post('/commands', params).subscribe((response: any) => {
@@ -384,7 +398,11 @@ export class BanHangComponent implements OnInit {
       Object.keys(this.PSTHModel.controls).forEach(key => {
         if (key === 'NGAY_CT') {
           this.PSTHModel.controls[key].setValue(data[key] ? new Date(data[key]) : '');
-        } else {
+        }
+        else if (key === 'CreatedOn') {
+          this.PSTHModel.controls[key].setValue(data[key] ? new Date(data[key]) : '');
+        }
+        else {
           this.PSTHModel.controls[key].setValue(data[key] ? data[key] : '');
         }
       });
@@ -439,9 +457,15 @@ export class BanHangComponent implements OnInit {
       this.TonKhoDichDanh = res.SelectTonKho
       this.TonKhoDichDanh.length
       this.TonKhoDichDanh.forEach(item => {
-        this.PSCT.push({ DIEN_GIAI: item.DIEN_GIAI, SL_TON: item.SL_TON, SO_LUONG: item.SO_LUONG_GUI, GIA: item.GIA, ID_PSCT_ORDER: item.ID_PSCT_ORDER })
+        this.PSCT.push({ DIEN_GIAI: item.TEN_NL, SL_TON: item.SL_TON, SO_LUONG: item.SO_LUONG_GUI, SL_YEUCAU: item.SL_YEUCAU, GIA: item.GIA, ID_PSCT_ORDER: item.ID_PSCT_ORDER })
       })
     });
+  }
+  getTotalSL(marks) {
+    return marks.reduce((acc, { SO_LUONG }) => acc += +(SO_LUONG || 0), 0);
+  }
+  getTotalKG(marks) {
+    return marks.reduce((acc, { SL_YEUCAU }) => acc += +(SL_YEUCAU || 0), 0);
   }
 }
 

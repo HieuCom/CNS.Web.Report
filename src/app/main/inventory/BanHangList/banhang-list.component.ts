@@ -147,7 +147,7 @@ export class BanHangListComponent implements OnInit {
       "Format": "d"
     },
     {
-      "Name": "SO_CT",
+      "Name": "SO_CT",  
       "Caption": "Số CT",
       "Format": "",
       "Width": 90

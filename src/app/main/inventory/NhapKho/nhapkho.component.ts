@@ -74,9 +74,17 @@ export class NhapKhoComponent implements OnInit {
     }
     else {
       this.toDay.setDate
-      this.PSTH.NGAY_CT = this.toDay;
+      this.toDay = this.getNowUTC();
+      this.PSTH.NGAY_CT = this.toDay
     }
   }
+
+
+  private getNowUTC() {
+    const now = new Date();
+    return new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
+  }
+  
   async getUserIdLogin(userName) {
     if (userName) {
       let data = [];
@@ -118,7 +126,7 @@ export class NhapKhoComponent implements OnInit {
     this.itemForm = this.formBuilder.group({
       SO_CT: ['', Validators.required],
       NGAY_CT: [new Date(), Validators.required],
-      NGAY_PHIEU: [new Date(), Validators.required],
+      CreatedOn: [new Date(), Validators.required],
       ID_TT: [''],
       MA_DT: [''],
       TY_GIA: [''],
@@ -176,8 +184,13 @@ export class NhapKhoComponent implements OnInit {
     let params = { "CommandText": "spSavebit2Indexs", "CommandType": 1025, "Parameters": dataIndex }
     this.dataService.post('/commands', params).subscribe((response: any) => {
       if (response.Data[0]) {
-        PSTH.ID_PS = response.Data[0].ID_PS
         let dataPSTH = [];
+        if (PSTH.ID_PS === undefined) {
+          PSTH.CreatedOn = this.toDay,
+            PSTH.CreatedBy = this.user.username
+        }
+        PSTH.ID_PS = response.Data[0].ID_PS
+
         dataPSTH.push(
           "@ID_PS", PSTH.ID_PS,
           "@SO_CT", PSTH.SO_CT,
@@ -245,15 +258,15 @@ export class NhapKhoComponent implements OnInit {
           "@CO_VAT", PSTH.CO_VAT,
           "@TAO_HDON", PSTH.TAO_HDON,
           "@NHAP", true,
-          "@CHOT", PSTH.CHOT,
+          "@CHOT", 0,
           "@CNSrID", PSTH.CNSrID,
           "@Attachments", PSTH.Attachments,
           "@TransStatus", PSTH.TransStatus,
           "@LinkedId", PSTH.LinkedId,
           "@ChangedOn", this.toDay,
           "@ChangedBy", this.user.username,
-          "@CreatedBy", this.user.username,
-
+          "@CreatedBy", PSTH.CreatedBy,
+          "@CreatedOn", PSTH.CreatedOn
         );
         //Lưu PSTH 
         params = { "CommandText": "spSavebit2PSHangHoaMain", "CommandType": 1025, "Parameters": dataPSTH }
@@ -268,6 +281,7 @@ export class NhapKhoComponent implements OnInit {
                   "@CNSrID", item.CNSrID,
                   "@ID_PS", PSTH.ID_PS,
                   "@ID_PSCT_N", item.ID_PSCT_N,
+                  "@ID_PSCT_ORDER", item.ID_PSCT_ORDER,
                   "@ID_KHO", item.ID_KHO,
                   "@ID_KHO_NHAN", item.ID_KHO_NHAN,
                   "@CACH_TINH_GIA", item.CACH_TINH_GIA,
@@ -330,7 +344,7 @@ export class NhapKhoComponent implements OnInit {
                   "@DA_TT", item.DA_TT,
                   "@NHAP", true,
                   "@LinkedId", item.LinkedId,
-                  "@SL_YEUCAU",item.SL_YEUCAU
+                  "@SL_YEUCAU", item.SL_YEUCAU
                 );
                 let params = { "CommandText": "spSavebit2PSHangHoaSub1", "CommandType": 1025, "Parameters": dataPSCT }
                 this.dataService.post('/commands', params).subscribe((response: any) => {
@@ -380,7 +394,7 @@ export class NhapKhoComponent implements OnInit {
   private fillFormData(data: any) {
     if (data) {
       Object.keys(this.itemForm.controls).forEach(key => {
-        if (key === 'NGAY_CT') {
+        if (key === 'NGAY_CT' || key === 'CreatedOn') {
           this.itemForm.controls[key].setValue(data[key] ? new Date(data[key]) : '');
         } else {
           this.itemForm.controls[key].setValue(data[key] ? data[key] : '');
@@ -427,6 +441,12 @@ export class NhapKhoComponent implements OnInit {
     if (item.ID_PSCT > 0) {
       this.PSCTRemove.push(item);
     }
+  }
+  getTotalSL(marks) {
+    return marks.reduce((acc, { SO_LUONG }) => acc += +(SO_LUONG || 0), 0);
+  }
+  getTotalKG(marks) {
+    return marks.reduce((acc, { SL_YEUCAU }) => acc += +(SL_YEUCAU || 0), 0);
   }
 }
 

@@ -53,8 +53,7 @@
         <td *ngFor="let colInfo of columnInfobanhang">
           <span *ngIf="colInfo.Format == 'd' ">{{banhang[colInfo.Name] | date:
             'dd/MM/yyyy'}}</span>
-          <span *ngIf="colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{banhang[colInfo.Name]
-            |number }}</span>
+          <span *ngIf="colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{banhang[colInfo.Name] |number }}</span>
           <span *ngIf="colInfo.Format == '' ">{{banhang[colInfo.Name] }}</span>
         </td>
         <td> <button class="action-delete-task" (click)="showEditModal(banhang.ID_PS)"><i
