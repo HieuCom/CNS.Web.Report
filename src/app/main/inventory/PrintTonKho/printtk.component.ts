@@ -25,6 +25,8 @@ export class PrintTKComponent implements OnInit {
   public userLoginId: number;
   public nametable :string ;
 
+   
+
   constructor(private _dataService: DataService,
     private route: ActivatedRoute,
     private columnInfoService: ColuminfoService,
@@ -34,6 +36,7 @@ export class PrintTKComponent implements OnInit {
   ngOnInit() {
     var user = this._authenService.getLoggedInUser();
     this.getUserIdLogin(user.username);
+
 
   
     //get param from component
@@ -50,6 +53,13 @@ export class PrintTKComponent implements OnInit {
     this.chungtus.sort((a, b) => (a.MA_NHOM_NL > b.MA_NHOM_NL) ? 1 : ((b.MA_NHOM_NL > a.MA_NHOM_NL) ? -1 : 0));
     //this.loadData();
   }
+
+  
+  getTotal(chungtus, groupName, field) {
+    return chungtus
+      .filter(chungtu => chungtu.MA_NHOM_NL === groupName)
+      .reduce((sum, chungtu) => sum + chungtu[field], 0);
+}
 
   async getUserIdLogin(userName) {
     if (userName) {

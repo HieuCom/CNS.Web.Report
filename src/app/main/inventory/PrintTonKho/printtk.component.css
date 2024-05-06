@@ -63,4 +63,14 @@
 .small-column {
     max-width: 50px; /* Điều chỉnh độ rộng của các cột lớn */
 }
+.caption{
+    display: flex;
+    justify-content: flex-end;
+}
+.total{
+    padding-right: 200px;
+    background-color: #e6e6e6;
+}
+
+
 

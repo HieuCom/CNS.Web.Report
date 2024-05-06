@@ -24,12 +24,12 @@ import { SelectTonKhoComponent } from './SelectTonKho/selecttonkho.component';
 import { TheoDoiChungTuComponent } from './TheoDoiChungTu/theodoichungtu.component';
 import { HoaDongListComponent } from './TheoDoiHoatDong/hoatdong-list.component';
 import { PrintCanDoiKeToanComponent } from './PrintCDKT/CanDoiKeToan/TheoDoiChungTu/print-candoiketoan.component';
-import { NgxPrintModule } from 'ngx-print';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 import { CanDoiKeToanComponent2 } from './TheoDoiHoatDong/cdkt.component';
 import { LuuChuyenTienTeListComponent2 } from './TheoDoiHoatDong/lctt';
 import { NhapXuatTonKhoComponent } from './TheoDoiHoatDong/nhapxuattonkho.component';
 import { PrintTKComponent } from './PrintTonKho/printtk.component';
+import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
 
 @NgModule({
   imports: [
@@ -58,6 +58,7 @@ import { PrintTKComponent } from './PrintTonKho/printtk.component';
     HoaDongListComponent,
     LuuChuyenTienTeListComponent2,
     NhapXuatTonKhoComponent,
+    SoNhatKyChungComponent,
     PrintTKComponent,
     PrintCanDoiKeToanComponent,
 

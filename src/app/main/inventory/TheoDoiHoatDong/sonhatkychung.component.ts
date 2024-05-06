@@ -4,15 +4,14 @@ import { MessageContstants } from 'src/app/core/common/message.constants';
 import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NhapKhoComponent } from '../NhapKho/nhapkho.component';
 import { NavigationExtras, Router } from '@angular/router';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 @Component({
-  selector: 'app-nhapxuattonkho-list',
+  selector: 'app-sonhatkychung',
   templateUrl: './hoatdong-list.component.html',
   styleUrls: ['./hoatdong-list.component.css']
 })
-export class NhapXuatTonKhoComponent implements OnInit {
+export class SoNhatKyChungComponent implements OnInit {
 
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
@@ -32,7 +31,7 @@ export class NhapXuatTonKhoComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'BÁO CÁO NHẬP XUẤT TỒN KHO';
+  public nametable= 'Sổ Nhật Ký Chung';
 
   bsModalRef: BsModalRef;
   
@@ -58,17 +57,18 @@ export class NhapXuatTonKhoComponent implements OnInit {
   }
 
   async loadData() {
+  
     try {
-      const response: any = await this.dataService.postCanDoiKeToan('/NhapXuatTon', 
-      { TU_NGAY:this.getNowUTC(this.fromDate),
-        DEN_NGAY: this.getNowUTC(this.toDate),
-        TU_NGAY_TR:this.getNowUTC(this.fromDateTR), 
-        DEN_NGAY_TR:this.getNowUTC(this.toDateTR) }).toPromise();
+    
+      const response: any = await this.dataService.postCanDoiKeToan('/SoNhatKyChung', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate)}).toPromise();
       this.nhapkhos = response;
-      this.nhapkhos.sort((a, b) => (a.MA_NHOM_NL > b.MA_NHOM_NL) ? 1 : ((b.MA_NHOM_NL > a.MA_NHOM_NL) ? -1 : 0));
+      console.log(this.nhapkhos.length);
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error('An error occurred:', error); 
     }
+    
+ 
   }
 
   chuyen(){
@@ -119,78 +119,84 @@ export class NhapXuatTonKhoComponent implements OnInit {
   
   public columnInfonhapkho: any[] = [
     {
-      "Name": "MA_NHOM_NL",
-      "Caption": "Mã Nhóm NL",
+      "Name": "NGAY_CT",
+      "Caption": "Ngày CT",
+      "Width": 50,
+      "Format": "d"
+    },
+    {
+      "Name": "MA_TK",
+      "Caption": "Mã tài khoản",
       "Width": 50,
       "Format": ""
     },
     {
-        "Name": "MA_NL",
-        "Caption": "Mã HH'VT",
+        "Name": "SO_CT",
+        "Caption": "Số chứng từ",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "TEN_TK",
+        "Caption": "Tên tài khoản",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "PS_NO",
+        "Caption": "Phát sinh nợ",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "PS_CO",
+        "Caption": "Phát sinh có",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "PS_NO_NT",
+        "Caption": "Phát sinh nợ(NT)",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "PS_CO_NT",
+        "Caption": "Phát sinh có(NT)",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "ONG_BA",
+        "Caption": "Ông bà",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "MA_DT",
+        "Caption": "Mã đối tượng",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "TEN_DT",
+        "Caption": "Tên đối tượng",
         "Width": 50,
         "Format": ""
       },
     {
-      "Name": "TEN_NL",
-      "Caption": "Tên Hàng Hóa ,Vật Tư ", 
+      "Name": "DIEN_GIAI",
+      "Caption": "Diễn giải", 
       "Width": 70,
       "Format": ""
     },
     {
-      "Name": "TEN_DVT",
-      "Caption": "Đơn Vị Tính",
-      "Width": 50,
+      "Name": "mDIEN_GIAI",
+      "Caption": "Diễn giải tổng", 
+      "Width": 70,
       "Format": ""
     },
-    {
-      "Name": "LUONG_DK",
-      "Caption": "Lượng Đầu Kỳ",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-      "Name": "TIEN_DK",
-      "Caption": "Tiền Đầu Kỳ",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-        "Name": "LUONG_NHAP",
-        "Caption": "Lượng nhập",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "TIEN_NHAP",
-        "Caption": "Tiền nhập",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "LUONG_XUAT",
-        "Caption": "Lượng xuất",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "TIEN_XUAT",
-        "Caption": "Tiền xuất",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "LUONG_TON",
-        "Caption": "Lượng tồn",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-
-      {
-        "Name": "TIEN_TON",
-        "Caption": "Lượng tồn",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
+    
     
   ]
   
