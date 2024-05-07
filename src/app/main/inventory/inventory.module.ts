@@ -30,6 +30,8 @@ import { LuuChuyenTienTeListComponent2 } from './TheoDoiHoatDong/lctt';
 import { NhapXuatTonKhoComponent } from './TheoDoiHoatDong/nhapxuattonkho.component';
 import { PrintTKComponent } from './PrintTonKho/printtk.component';
 import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
+import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
+import { PreviewComponent } from './Preview/preview.component';
 
 @NgModule({
   imports: [
@@ -61,6 +63,8 @@ import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.componen
     SoNhatKyChungComponent,
     PrintTKComponent,
     PrintCanDoiKeToanComponent,
+    PrintNhatKyChungComponent,
+    PreviewComponent
 
     
     // SimpleTinyComponent

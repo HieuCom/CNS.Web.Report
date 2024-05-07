@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, TemplateRef, ViewChild, ɵɵinjectPipeChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageContstants } from 'src/app/core/common/message.constants';
@@ -23,14 +24,23 @@ export class PrintTKComponent implements OnInit {
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
+  
   public nametable :string ;
+
+safeHtml: SafeHtml;
+htmlString: string;
+htmlStringTable: string;
+
 
    
 
   constructor(private _dataService: DataService,
+    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private columnInfoService: ColuminfoService,
     private _authenService: AuthenService) {
+
+     
   }
 
   ngOnInit() {
@@ -52,6 +62,94 @@ export class PrintTKComponent implements OnInit {
     this.chungtus = history.state.chungtus;
     this.chungtus.sort((a, b) => (a.MA_NHOM_NL > b.MA_NHOM_NL) ? 1 : ((b.MA_NHOM_NL > a.MA_NHOM_NL) ? -1 : 0));
     //this.loadData();
+
+    this.htmlStringTable = `  
+  
+    <div class="table-responsive">
+    <h2 class="nametb" >${this.nametable}</h2>
+    <p class="time" >Từ ngày:${ this.fromDate.split('-').reverse().join('/') } đến ngày: ${ this.toDate.split('-').reverse().join('/') } </p>
+  <!--   
+    <div class="caption" > 
+      <div class="total"  >Tổng cộng</div>
+      <div  >327.000.000</div>
+      <div >1.327.000.000</div>
+      <div >327.000.000</div>
+      <div>327.000.000</div>
+    </div> -->
+  
+    <table class="table table-bordered">
+     
+      <thead>
+        <tr>
+          <th rowspan="2"  class="small-column">Mã HH,VT</th>
+          <th rowspan="2" class="small-column">Tên HH,VT</th>
+          <th rowspan="2" class="small-column">
+            ĐVT
+          </th>
+           <th colspan="2" style="text-align: center;" class="large-column">Đầu kỳ</th>
+           <th colspan="2"  style="text-align: center;" class="large-column">Nhập trong kỳ</th>
+           <th colspan="2"  style="text-align: center;" class="large-column">Xuất trong kỳ</th>
+           <th colspan="2"  style="text-align: center;" class="large-column">Tồn cuối kỳ</th>
+        </tr>
+  
+        <tr>
+          <th>Số lượng</th>
+          <th>Tiền</th>
+          <th>Số lượng</th>
+          <th>Tiền</th>
+          <th>Số lượng</th>
+          <th>Tiền</th>
+          <th>Số lượng</th>
+          <th>Tiền</th>
+      </tr>
+      </thead>
+      <tbody>
+  
+        <!-- tên nhóm vật tư -->
+    <ng-container *ngFor="let chungtu of chungtus ; let i = index">
+      
+      <!-- Thêm hàng mới để hiển thị tên nhóm -->
+      <tr *ngIf="i == 0 || chungtus[i].MA_NHOM_NL != chungtus[i-1].MA_NHOM_NL">
+        <td><strong>{{ chungtu.MA_NHOM_NL }} </strong> </td>
+          <td>Số lượng</td>
+          <td></td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_DK') |number }}</td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_DK')|number }}</td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_NHAP') |number }}</td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_NHAP')|number }}</td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_XUAT') |number }}</td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_XUAT')|number }}</td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_TON') |number }}</td>
+          <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_TON')|number }}</td>
+      </tr>
+  
+      <!-- Hiển thị thông tin của từng mục -->
+      <tr class="select-item">
+        <td *ngFor="let colInfo of columnInfonhapkho">
+          <strong *ngIf="chungtu.BOLD == true && colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:'dd/MM/yyyy'}}</strong>
+          <span *ngIf="chungtu.BOLD != true && colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:'dd/MM/yyyy'}}</span>
+          
+          <strong *ngIf="chungtu.BOLD == true && colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{chungtu[colInfo.Name]|number }}</strong>
+          <span *ngIf="chungtu.BOLD != true && colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{chungtu[colInfo.Name]|number }}</span>
+          
+          <strong *ngIf="chungtu.BOLD == true && colInfo.Format == '' ">{{chungtu[colInfo.Name] }}</strong>
+          <span *ngIf="chungtu.BOLD !=  true && colInfo.Format == '' ">{{chungtu[colInfo.Name] }}</span>
+        </td>
+      </tr>
+  
+    </ng-container>
+  
+      </tbody>
+    </table>
+  
+  
+    
+   
+   
+  </div>`;
+
+    this.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.htmlStringTable);
+    this.htmlString = this.safeHtml.toString();
   }
 
   
@@ -143,6 +241,9 @@ export class PrintTKComponent implements OnInit {
       },
     
   ]
+
+   // Define your HTML string here
+ 
   
 
 }

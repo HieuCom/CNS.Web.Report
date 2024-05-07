@@ -9,6 +9,8 @@ import { CanDoiKeToanComponent2 } from './TheoDoiHoatDong/cdkt.component';
 import { NhapXuatTonKhoComponent } from './TheoDoiHoatDong/nhapxuattonkho.component';
 import { PrintTKComponent } from './PrintTonKho/printtk.component';
 import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
+import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
+import { PreviewComponent } from './Preview/preview.component';
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
     { path: 'nhapkho', component: NhapKhoListComponent },
@@ -19,7 +21,9 @@ const routes: Routes = [
     { path: 'nhapxuattk', component: NhapXuatTonKhoComponent },
     { path: 'sonhatky', component: SoNhatKyChungComponent },
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
-    {path: 'printTK', component: PrintTKComponent}
+    {path: 'printTK', component: PrintTKComponent},
+    {path: 'printNKC', component: PrintNhatKyChungComponent},
+    {path: 'print', component: PreviewComponent},
     
 
 ];

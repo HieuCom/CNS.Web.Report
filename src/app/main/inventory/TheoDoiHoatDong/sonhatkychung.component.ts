@@ -82,7 +82,7 @@ export class SoNhatKyChungComponent implements OnInit {
         chungtus: this.nhapkhos
       }
     };
-    this.router.navigate(['/main/inventory/printTK'], navigationExtras);
+    this.router.navigate(['/main/inventory/print'], navigationExtras);
     
   }
 
