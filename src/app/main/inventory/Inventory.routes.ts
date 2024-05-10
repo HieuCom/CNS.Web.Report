@@ -11,6 +11,7 @@ import { PrintTKComponent } from './PrintTonKho/printtk.component';
 import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
 import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
 import { PreviewComponent } from './Preview/preview.component';
+import { SoChiTietTKComponent } from './TheoDoiHoatDong/sochitiettk.component';
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
     { path: 'nhapkho', component: NhapKhoListComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     { path: 'luuchuyentt', component: LuuChuyenTienTeListComponent2 },
     { path: 'nhapxuattk', component: NhapXuatTonKhoComponent },
     { path: 'sonhatky', component: SoNhatKyChungComponent },
+    { path: 'sochitiettk', component: SoChiTietTKComponent },
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
     {path: 'printTK', component: PrintTKComponent},
     {path: 'printNKC', component: PrintNhatKyChungComponent},

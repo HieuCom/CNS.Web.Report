@@ -25,6 +25,7 @@ export class PrintCanDoiKeToanComponent implements OnInit {
   public userLoginId: number;
   public nametable :string ;
   public columnInfochungtu: any[];
+  public maTk: string ;
 
   constructor(private _dataService: DataService,
     private route: ActivatedRoute,
@@ -43,6 +44,7 @@ export class PrintCanDoiKeToanComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
+      this.maTk = params['ma_tk']
       // .split('-').reverse().join('/')
      
     });

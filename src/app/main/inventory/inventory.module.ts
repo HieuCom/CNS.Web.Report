@@ -32,6 +32,7 @@ import { PrintTKComponent } from './PrintTonKho/printtk.component';
 import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
 import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
 import { PreviewComponent } from './Preview/preview.component';
+import { SoChiTietTKComponent } from './TheoDoiHoatDong/sochitiettk.component';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { PreviewComponent } from './Preview/preview.component';
     LuuChuyenTienTeListComponent2,
     NhapXuatTonKhoComponent,
     SoNhatKyChungComponent,
+    SoChiTietTKComponent,
     PrintTKComponent,
     PrintCanDoiKeToanComponent,
     PrintNhatKyChungComponent,
