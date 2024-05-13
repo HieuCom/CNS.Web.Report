@@ -11,11 +11,11 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-printNKC',
-  templateUrl: './preview.component.html',
-  styleUrls: ['./preview.component.css']
+  selector: 'app-printSQTM',
+  templateUrl: './preview-sqnh.component.html',
+  styleUrls: ['./soquytienguinh.component.css']
 })
-export class PreviewComponent implements OnInit {
+export class PreviewSQTNHComponent implements OnInit {
   public fromDate: string ='';
   public toDate: string = '';
   public chungtus: any[];
@@ -24,31 +24,36 @@ export class PreviewComponent implements OnInit {
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
+  public ma_tk: string = '111';
   
   public nametable :string ;
   
   public stringheadtable:string =`
   <tr>
+           <th rowspan="2" class="small-column">
+              Ngày
+            </th>
             <th colspan="2" style="text-align: center;" class="large-column">
-              CHỨNG TỪ
+              SỐ CT
             </th>
        
             <th rowspan="2" class="small-column">
               DIỄN GIẢI
             </th>
-            <th rowspan="2" class="small-column">
-              TK DƯ
-            </th>
+           
             <th colspan="2" style="text-align: center;" class="large-column">
-              PHÁT SINH
+              SỐ TIỀN
             </th>
+            <th rowspan="2" class="small-column">
+            TỒN QUỸ
+          </th>
           </tr>
       
           <tr>
-            <th>SỐ CT</th>
-            <th>NGÀY CT</th>
-            <th>NỢ</th>
-            <th>CÓ</th>
+            <th>PT</th>
+            <th>PC</th>
+            <th>THU</th>
+            <th>CHI</th>
            
         </tr>
   
@@ -86,7 +91,7 @@ export class PreviewComponent implements OnInit {
     });
 
     this.chungtus = history.state.chungtus;
-    this.chungtus.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0));
+   // this.chungtus.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0));
     //this.loadData();
 
   }

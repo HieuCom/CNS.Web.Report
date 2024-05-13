@@ -21,6 +21,7 @@
     <!-- <div [innerHTML]="safeHtml"></div> -->
     <div class="table-responsive">
       <h2 class="nametb" >{{this.nametable}}</h2>
+      <h4 class="nametb" >Tài khoản:{{this.ma_tk}}</h4>
       <p class="time" >Từ ngày:{{ this.fromDate.split('-').reverse().join('/') }} đến ngày: {{ this.toDate.split('-').reverse().join('/') }} </p>
       <!--   
       <div class="caption" > 
@@ -33,7 +34,35 @@
       
       <table class="table table-bordered">
       
-        <thead [innerHTML]="headHtml" >
+        <!-- <thead [innerHTML]="headHtml" > -->
+          <thead > 
+          <tr>
+            <th rowspan="2" class="small-column">
+               Ngày CT
+             </th>
+             <th colspan="2" style="text-align: center;" class="large-column">
+               SỐ CT
+             </th>
+        
+             <th rowspan="2" class="small-column">
+               DIỄN GIẢI
+             </th>
+            
+             <th colspan="2" style="text-align: center;" class="large-column">
+               SỐ TIỀN
+             </th>
+             <th rowspan="2" class="small-column">
+             DƯ CUỐI
+           </th>
+           </tr>
+       
+           <tr>
+             <th>BÁO CÓ</th>
+             <th>BÁO NỢ</th>
+             <th>GỬI</th>
+             <th>RÚT</th>
+            
+         </tr>
 
         </thead>
 
@@ -44,26 +73,26 @@
         
         <!-- Thêm hàng mới để hiển thị tên nhóm -->
         <tr *ngIf="i == 0 || chungtus[i].SO_CT != chungtus[i-1].SO_CT">
-          <td><strong>{{ chungtu.SO_CT }} </strong> </td>
           <td><strong>{{ chungtu.NGAY_CT | date:'dd/MM/yyyy'}} </strong> </td>
-          <td><strong>{{ chungtu.DIEN_GIAI}} </strong> </td>
-          <td><strong>{{ chungtu.MA_TK }} </strong> </td>
-            <td>{{ getTotal(chungtus, chungtu.SO_CT,'PS_NO') |number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.SO_CT,'PS_CO')|number }}</td>
-        </tr>
-      
-        <!-- Hiển thị thông tin của từng mục -->
-        <tr class="select-item">
-          <td *ngFor="let colInfo of columnInfonhapkho">
-            <strong *ngIf="chungtu.BOLD == true && colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:'dd/MM/yyyy'}}</strong>
-            <span *ngIf="chungtu.BOLD != true && colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:'dd/MM/yyyy'}}</span>
-            
-            <strong *ngIf="chungtu.BOLD == true && colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{chungtu[colInfo.Name]|number }}</strong>
-            <span *ngIf="chungtu.BOLD != true && colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{chungtu[colInfo.Name]|number }}</span>
-            
-            <strong *ngIf="chungtu.BOLD == true && colInfo.Format == '' ">{{chungtu[colInfo.Name] }}</strong>
-            <span *ngIf="chungtu.BOLD !=  true && colInfo.Format == '' ">{{chungtu[colInfo.Name] }}</span>
+
+          
+          <!-- If chungtu.CRDB is not true, display value in PC column -->
+          <td >
+            <strong *ngIf="chungtu.CRDB==true"  >{{ chungtu.SO_CT }}</strong>
+            <strong *ngIf="chungtu.CRDB==false"></strong>
           </td>
+
+          <td >
+            <strong *ngIf="chungtu.CRDB==false">{{ chungtu.SO_CT }}</strong>
+            <strong *ngIf="chungtu.CRDB==true"></strong>
+          </td>
+
+
+          <td><strong>{{ chungtu.DIEN_GIAI}} </strong> </td>
+          <td>{{ getTotal(chungtus, chungtu.SO_CT,'PS_NO') |number }}</td>
+            <td>{{ getTotal(chungtus, chungtu.SO_CT,'PS_CO')|number }}</td>
+          <td><strong>{{ chungtu.TON_QUY }} </strong> </td>
+            
         </tr>
       
       </ng-container>

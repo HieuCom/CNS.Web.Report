@@ -6,14 +6,17 @@
       <li><a routerLink="" routerLinkActive="active"><i class="fa fa-dashboard"></i> {{'dash_board' | translate}}</a>
       </li>
 
-      <li *ngIf="userLevel < 3"><a routerLink="inventory/nhapkho" routerLinkActive="active">Phiếu nhập hàng</a></li>
+      <!-- <li *ngIf="userLevel < 3"><a routerLink="inventory/nhapkho" routerLinkActive="active">Phiếu nhập hàng</a></li>
       <li *ngIf="userLevel < 3"><a routerLink="inventory/banhang" routerLinkActive="active">Phiếu xuất hàng</a></li>
-      <li *ngIf="userLevel < 3"><a routerLink="inventory/candoi" routerLinkActive="active">Cân Đối Kế Toán</a></li>
+      <li *ngIf="userLevel < 3"><a routerLink="inventory/candoi" routerLinkActive="active">Cân Đối Kế Toán</a></li> -->
       <li *ngIf="userLevel < 3"><a routerLink="inventory/hoatdong" routerLinkActive="active">Kết Quả Hoạt Động Sản Xuất Kinh Doanh </a></li>
       <li *ngIf="userLevel < 3"><a routerLink="inventory/luuchuyentt" routerLinkActive="active">Lưu Chuyển Tiền Tệ </a></li>
       <li *ngIf="userLevel < 3"><a routerLink="inventory/nhapxuattk" routerLinkActive="active">Nhập Xuất Tồn Kho </a></li>
       <li *ngIf="userLevel < 3"><a routerLink="inventory/sochitiettk" routerLinkActive="active">Sổ Chi Tiết Tài Khoản </a></li>
       <li *ngIf="userLevel < 3"><a routerLink="inventory/sonhatky" routerLinkActive="active">Sổ Nhật Ký Chung </a></li>
+      <li *ngIf="userLevel < 3"><a routerLink="inventory/soquytienmat" routerLinkActive="active">Sổ Quỹ Tiền Mặt</a></li>
+      <li *ngIf="userLevel < 3"><a routerLink="inventory/sotienguinh" routerLinkActive="active">Sổ Quỹ Tiền Gủi Ngân Hàng</a></li>
+      <li *ngIf="userLevel < 3"><a routerLink="inventory/soquytonghop" routerLinkActive="active">Sổ Quỹ Tổng Hợp</a></li>
       <li *ngIf="userLevel >= 3"> <a routerLink="inventory/baocao" routerLinkActive="active">Theo dõi đơn hàng</a> </li>
 
       <!-- <li ><a routerLink="inventory/nhapkho" routerLinkActive="active">Phiếu nhập hàng</a></li>
