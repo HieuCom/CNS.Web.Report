@@ -19,6 +19,7 @@ import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
 
 import { SoQuyTienGuiNHComponent } from './SoTienGuiNH/soquytienguinh.component';
 import { SoQuyTongHopComponent } from './SoTienGuiNH/tonghop.component';
+import { TongHopBaoCaoComponent } from './TongHopBaoCao/tonghopbaocao.component';
 
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
     {path: 'print', component: PreviewComponent},
     {path: 'prinSQTM', component: PreviewSQTMComponent},
     {path: 'printSQTGNH', component: PreviewSQTNHComponent},
+    {path: 'tonghopbaocao', component: TongHopBaoCaoComponent},
     
 
 ];
