@@ -23,6 +23,7 @@
 
 <div class="table-responsive">
   <h2 class="nametb" >{{this.nametable}}</h2>
+  <p *ngIf="maTk" class="time" >Tài khoản:{{this.maTk}}</p>
   <p class="time" >Từ ngày:{{ this.fromDate.split('-').reverse().join('/') }} đến ngày: {{ this.toDate.split('-').reverse().join('/') }} </p>
    
  

@@ -50,6 +50,7 @@ export class CanDoiKeToanComponent2 implements OnInit {
     this.getUserIdLogin(user.username);
     this.loadData();
   }
+  
    // update columnInfo to show in table
   updateColumnInfo() {
     this.columnInfoService.changeColumnInfo(this.columnInfonhapkho);

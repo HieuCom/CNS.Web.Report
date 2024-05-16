@@ -7,11 +7,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NavigationExtras, Router } from '@angular/router';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 @Component({
-  selector: 'app-sonhatkychung',
-  templateUrl: './hoatdong-list.component.html',
-  styleUrls: ['./hoatdong-list.component.css']
+  selector: 'app-soquytienmat',
+  templateUrl: './soquytienmat.component.html',
+  styleUrls: ['./soquytienmat.component.css']
 })
-export class SoNhatKyChungComponent implements OnInit {
+export class SoQuyTienMatComponent implements OnInit {
 
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
@@ -31,7 +31,8 @@ export class SoNhatKyChungComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'Sổ Nhật Ký Chung';
+  public nametable= 'Sổ Quỹ Tiền Mặt';
+  public ma_tk: string = '111';
 
   bsModalRef: BsModalRef;
   
@@ -60,8 +61,10 @@ export class SoNhatKyChungComponent implements OnInit {
   
     try {
     
-      const response: any = await this.dataService.postCanDoiKeToan('/SoNhatKyChung', 
-      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate)}).toPromise();
+      const response: any = await this.dataService.postCanDoiKeToan('/SoQuyTienMat', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate), MA_TK : this.ma_tk
+
+      }).toPromise();
       this.nhapkhos = response;
       console.log(this.nhapkhos.length);
     } catch (error) {
@@ -82,9 +85,14 @@ export class SoNhatKyChungComponent implements OnInit {
         chungtus: this.nhapkhos
       }
     };
-    this.router.navigate(['/main/inventory/print'], navigationExtras);
+    this.router.navigate(['/main/inventory/prinSQTM'], navigationExtras);
     
   }
+  getTotal(chungtus, groupName, field) {
+    return chungtus
+      .filter(chungtu => chungtu.SO_CT === groupName)
+      .reduce((sum, chungtu) => sum + chungtu[field], 0);
+}
 
 
 
@@ -125,83 +133,50 @@ export class SoNhatKyChungComponent implements OnInit {
       "Format": "d"
     },
     {
-      "Name": "MA_TK",
-      "Caption": "Mã tài khoản",
-      "Width": 50,
-      "Format": ""
-    },
-    {
         "Name": "SO_CT",
         "Caption": "Số chứng từ",
         "Width": 50,
         "Format": ""
       },
       {
-        "Name": "TEN_TK",
-        "Caption": "Tên tài khoản",
-        "Width": 50,
+        "Name": "DIEN_GIAI",
+        "Caption": "Diễn giải", 
+        "Width": 70,
         "Format": ""
       },
-      {
-        "Name": "PS_NO",
-        "Caption": "Phát sinh nợ",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "PS_CO",
-        "Caption": "Phát sinh có",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "PS_NO_NT",
-        "Caption": "Phát sinh nợ(NT)",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "PS_CO_NT",
-        "Caption": "Phát sinh có(NT)",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
+
       {
         "Name": "ONG_BA",
         "Caption": "Ông bà",
         "Width": 50,
         "Format": ""
       },
+
       {
-        "Name": "MA_DT",
-        "Caption": "Mã đối tượng",
+        "Name": "TK_DOI_UNG",
+        "Caption": "TK đối ứng",
         "Width": 50,
         "Format": ""
       },
       {
-        "Name": "TEN_DT",
-        "Caption": "Tên đối tượng",
+        "Name": "PS_NO",
+        "Caption": "Thu tiền",
         "Width": 50,
-        "Format": ""
+        "Format": "#,##0.##;(#,##0.##);#"
       },
-    {
-      "Name": "DIEN_GIAI",
-      "Caption": "Diễn giải", 
-      "Width": 70,
-      "Format": ""
-    },
-    {
-      "Name": "mDIEN_GIAI",
-      "Caption": "Diễn giải tổng", 
-      "Width": 70,
-      "Format": ""
-    },
-    {
-      "Name": "mDIEN_GIAI",
-      "Caption": "Diễn giải tổng", 
-      "Width": 70,
-      "Format": ""
-    },
+      {
+        "Name": "PS_CO",
+        "Caption": "Chi tiền",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "TON_QUY",
+        "Caption": "Tồn Quỹ",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      
     
   ]
   

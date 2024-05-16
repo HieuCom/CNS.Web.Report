@@ -9,6 +9,18 @@ import { CanDoiKeToanComponent2 } from './TheoDoiHoatDong/cdkt.component';
 import { NhapXuatTonKhoComponent } from './TheoDoiHoatDong/nhapxuattonkho.component';
 import { PrintTKComponent } from './PrintTonKho/printtk.component';
 import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
+import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
+import { PreviewComponent } from './Preview/preview.component';
+import { SoChiTietTKComponent } from './TheoDoiHoatDong/sochitiettk.component';
+import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
+import { PreviewSQTMComponent } from './SoQuyTienMat/preview-sqtm.component';
+
+import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
+
+import { SoQuyTienGuiNHComponent } from './SoTienGuiNH/soquytienguinh.component';
+import { SoQuyTongHopComponent } from './SoTienGuiNH/tonghop.component';
+import { TongHopBaoCaoComponent } from './TongHopBaoCao/tonghopbaocao.component';
+
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
     { path: 'nhapkho', component: NhapKhoListComponent },
@@ -18,8 +30,17 @@ const routes: Routes = [
     { path: 'luuchuyentt', component: LuuChuyenTienTeListComponent2 },
     { path: 'nhapxuattk', component: NhapXuatTonKhoComponent },
     { path: 'sonhatky', component: SoNhatKyChungComponent },
+    { path: 'sochitiettk', component: SoChiTietTKComponent },
+    { path: 'soquytienmat', component: SoQuyTienMatComponent },
+    { path: 'sotienguinh', component: SoQuyTienGuiNHComponent },
+    { path: 'soquytonghop', component: SoQuyTongHopComponent },
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
-    {path: 'printTK', component: PrintTKComponent}
+    {path: 'printTK', component: PrintTKComponent},
+    {path: 'printNKC', component: PrintNhatKyChungComponent},
+    {path: 'print', component: PreviewComponent},
+    {path: 'prinSQTM', component: PreviewSQTMComponent},
+    {path: 'printSQTGNH', component: PreviewSQTNHComponent},
+    {path: 'tonghopbaocao', component: TongHopBaoCaoComponent},
     
 
 ];

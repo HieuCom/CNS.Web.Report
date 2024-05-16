@@ -17,9 +17,6 @@
     </div>
     
     </div>
-    
-    
-    
   
     <!-- <div [innerHTML]="safeHtml"></div> -->
     <div class="table-responsive">
@@ -36,48 +33,47 @@
       
       <table class="table table-bordered">
       
-        <thead>
+        <thead  >
           <tr>
-            <th rowspan="2"  class="small-column">Mã HH,VT</th>
-            <th rowspan="2" class="small-column">Tên HH,VT</th>
-            <th rowspan="2" class="small-column">
-              ĐVT
+            <th colspan="2" style="text-align: center;" class="large-column">
+              CHỨNG TỪ
             </th>
-            <th colspan="2" style="text-align: center;" class="large-column">Đầu kỳ</th>
-            <th colspan="2"  style="text-align: center;" class="large-column">Nhập trong kỳ</th>
-            <th colspan="2"  style="text-align: center;" class="large-column">Xuất trong kỳ</th>
-            <th colspan="2"  style="text-align: center;" class="large-column">Tồn cuối kỳ</th>
+       
+            <th rowspan="2" class="small-column">
+              DIỄN GIẢI
+            </th>
+            <th rowspan="2" class="small-column">
+              TK DƯ
+            </th>
+            <th colspan="2" style="text-align: center;" class="large-column">
+              PHÁT SINH
+            </th>
           </tr>
       
           <tr>
-            <th>Số lượng</th>
-            <th>Tiền</th>
-            <th>Số lượng</th>
-            <th>Tiền</th>
-            <th>Số lượng</th>
-            <th>Tiền</th>
-            <th>Số lượng</th>
-            <th>Tiền</th>
+            <th>SỐ CT</th>
+            <th>NGÀY CT</th>
+            <th>NỢ</th>
+            <th>CÓ</th>
+           
         </tr>
+          
         </thead>
+
         <tbody>
       
           <!-- tên nhóm vật tư -->
       <ng-container *ngFor="let chungtu of chungtus ; let i = index">
         
         <!-- Thêm hàng mới để hiển thị tên nhóm -->
-        <tr *ngIf="i == 0 || chungtus[i].MA_NHOM_NL != chungtus[i-1].MA_NHOM_NL">
-          <td><strong>{{ chungtu.MA_NHOM_NL }} </strong> </td>
-            <td>Số lượng</td>
-            <td></td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_DK') |number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_DK')|number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_NHAP') |number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_NHAP')|number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_XUAT') |number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_XUAT')|number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'LUONG_TON') |number }}</td>
-            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'TIEN_TON')|number }}</td>
+        <tr *ngIf="i == 0 || chungtus[i].SO_CT != chungtus[i-1].SO_CT">
+          <td><strong>{{ chungtu.SO_CT }} </strong> </td>
+          <td><strong>{{ chungtu.NGAY_CT | date:'dd/MM/yyyy'}} </strong> </td>
+          <td><strong>{{ chungtu.DIEN_GIAI}} </strong> </td>
+          <td><strong>{{ chungtu.MA_TK }} </strong> </td>
+            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'PS_NO') |number }}</td>
+            <td>{{ getTotal(chungtus, chungtu.MA_NHOM_NL,'PS_CO')|number }}</td>
+           
         </tr>
       
         <!-- Hiển thị thông tin của từng mục -->
@@ -98,14 +94,7 @@
       
         </tbody>
       </table>
-      
-      
-      
-      
-      
       </div>
- 
-  
 
     <p style="text-align: right; margin-right: 20px;" >
       Ngày.... tháng.... năm....
