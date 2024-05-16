@@ -11,6 +11,12 @@ import { SystemConstants } from '../../core/common/system.constants';
 export class SidebarMenuComponent implements OnInit {
   public functions: any[];
   public userLevel: any;
+  public submenus: any;
+
+ 
+ 
+
+  
   constructor(private authenService: AuthenService, private dataService: DataService) { }
 
   ngOnInit() {
@@ -29,5 +35,40 @@ export class SidebarMenuComponent implements OnInit {
     //   this.dataService.post(url).subscribe((result: any) => {
     //   this.functions = result;
     // }, error => this.dataService.handleError(error));
+     this.submenus = {
+
+      showSubmenu  :false,
+  
+      showSubmenu2 : false,
+    
+      showSubmenuRpbank : false,
+    
+      showSubmenujournal : false,
+    };
   }
+
+  // toggleMenu(event: Event) {
+  //   event.stopPropagation();
+  //   (event.currentTarget as HTMLElement).nextElementSibling.classList.toggle('open');
+  // }
+  
+  // toggleSubmenu(event: Event) {
+  //   event.stopPropagation();
+  //   (event.currentTarget as HTMLElement).nextElementSibling.classList.toggle('open');
+  // }
+
+  toggleSubmenu(menuName: string) {
+    this.submenus[menuName] = !this.submenus[menuName];
+  }
+
+  // toggle(menuName: string) {
+  //   this.submenus[menuName] = !this.submenus[menuName];
+  //   if(this.submenus.showSubmenu == false){
+  //     this.submenus.showSubmenu2 = !this.submenus.showSubmenu2;
+  //     this.submenus.showSubmenuRpbank = false;
+  //     this.submenus.showSubmenujournal = false;
+  //   }
+    
+  // }
+
 }
