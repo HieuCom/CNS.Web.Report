@@ -83,9 +83,9 @@
                     <a (click)="toggleSubmenu('showSubmenuRpbank')" routerLinkActive="active">Báo cáo ngân hàng</a> 
                     <div [style.display]="submenus.showSubmenuRpbank ? 'block' : 'none'" class="sub__menu-lv2">            
                             <ul>
-                              <li *ngIf="userLevel < 3"><a routerLink="inventory/soquytienmat" routerLinkActive="active">Sổ tiền gửi ngân hàng</a></li>
-                              <li *ngIf="userLevel < 3"><a routerLink="inventory/sotienguinh" routerLinkActive="active">Bảng kê phiếu thu</a></li>
-                              <li *ngIf="userLevel < 3"><a routerLink="inventory/soquytonghop" routerLinkActive="active">Bảng kê phiếu chi</a></li>
+                              <li *ngIf="userLevel < 3"><a routerLink="inventory/sotienguinh" routerLinkActive="active">Sổ tiền gửi ngân hàng</a></li>
+                              <li *ngIf="userLevel < 3"><a routerLink="inventory/" routerLinkActive="active">Bảng kê phiếu thu</a></li>
+                              <li *ngIf="userLevel < 3"><a routerLink="inventory/" routerLinkActive="active">Bảng kê phiếu chi</a></li>
                           </ul>
                     </div> 
                   </div>
@@ -94,13 +94,51 @@
               <a (click)="toggleSubmenu('showSubmenujournal')" routerLinkActive="active">Báo cáo nhật ký chung</a> 
               <div [style.display]="submenus.showSubmenujournal ? 'block' : 'none'" class="sub__menu-lv2">            
                       <ul >
-                        <li *ngIf="userLevel < 3"><a routerLink="inventory/soquytienmat" routerLinkActive="active">Sổ chi tiết tài khoản</a></li>
-                        <li *ngIf="userLevel < 3"><a routerLink="inventory/sotienguinh" routerLinkActive="active">Sổ nhật ký chung</a></li>
-                        <li *ngIf="userLevel < 3"><a routerLink="inventory/soquytonghop" routerLinkActive="active">Bảng kê phiếu chi</a></li>
-                        <li *ngIf="userLevel < 3"><a routerLink="inventory/soquytonghop" routerLinkActive="active">Bảng kê tổng hợp thu chi</a></li>
+                        <li *ngIf="userLevel < 3"><a routerLink="inventory/sochitiettk" routerLinkActive="active">Sổ chi tiết tài khoản</a></li>
+                        <li *ngIf="userLevel < 3"><a routerLink="inventory/sonhatky" routerLinkActive="active">Sổ nhật ký chung</a></li>
+                        <li *ngIf="userLevel < 3"><a routerLink="inventory/" routerLinkActive="active">Bảng kê phiếu chi</a></li>
+                        <li *ngIf="userLevel < 3"><a routerLink="inventory/" routerLinkActive="active">Bảng kê tổng hợp thu chi</a></li>
                     </ul>
               </div> 
            </div>
+
+           <div class="sub__menu-item" *ngIf="userLevel < 3" >   
+            <a (click)="toggleSubmenu('showInventory')" routerLinkActive="active">Báo cáo hàng tồn kho</a> 
+            <div [style.display]="submenus.showInventory ? 'block' : 'none'" class="sub__menu-lv2">            
+                    <ul >
+                      <li *ngIf="userLevel < 3"><a routerLink="inventory/thekho" routerLinkActive="active">Thẻ Kho</a></li>
+                      <li *ngIf="userLevel < 3"><a routerLink="inventory/nhapxuattk" routerLinkActive="active">Tổng hợp nhập xuất</a></li>
+               
+              
+                  </ul>
+            </div> 
+         </div>
+
+         <div class="sub__menu-item" *ngIf="userLevel < 3" >   
+          <a (click)="toggleSubmenu('showTax')" routerLinkActive="active">Báo cáo tài chính</a> 
+          <div [style.display]="submenus.showTax ? 'block' : 'none'" class="sub__menu-lv2">            
+                  <ul >
+                    <li *ngIf="userLevel < 3"><a routerLink="inventory/candoi" routerLinkActive="active">Bảng cân đối kế toán</a></li>
+                    <li *ngIf="userLevel < 3"><a routerLink="inventory/hoatdong" routerLinkActive="active">Báo cáo hoạt động sản xuất kinh doanh</a></li>
+                    <li *ngIf="userLevel < 3"><a routerLink="inventory/luuchuyentt" routerLinkActive="active">Báo cáo lưu chuyển tiền tệ</a></li>
+             
+            
+                </ul>
+          </div> 
+       </div>
+
+
+         <div class="sub__menu-item" *ngIf="userLevel < 3" >   
+          <a (click)="toggleSubmenu('showTax')" routerLinkActive="active">Báo cáo thuế</a> 
+          <div [style.display]="submenus.showTax ? 'block' : 'none'" class="sub__menu-lv2">            
+                  <ul >
+                    <li *ngIf="userLevel < 3"><a routerLink="inventory/hoadonmuavao" routerLinkActive="active">Tờ khai thuế GTGT</a></li>
+                   
+             
+            
+                </ul>
+          </div> 
+       </div>
 
               
          

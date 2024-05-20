@@ -39,6 +39,10 @@ import { SoQuyTienGuiNHComponent } from './SoTienGuiNH/soquytienguinh.component'
 import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
 import { SoQuyTongHopComponent } from './SoTienGuiNH/tonghop.component';
 import { TongHopBaoCaoComponent } from './TongHopBaoCao/tonghopbaocao.component';
+import { TheKhoComponent } from './TheKho/thekho.component';
+import { PreviewTheKhoComponent } from './TheKho/preview-thekho.component';
+import { HoaDonMuaVaoComponent } from './HoaDonMuaVao/hoadonmuavao.component';
+import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.component';
 
 @NgModule({
   imports: [
@@ -71,14 +75,21 @@ import { TongHopBaoCaoComponent } from './TongHopBaoCao/tonghopbaocao.component'
     SoChiTietTKComponent,
     SoQuyTienMatComponent,
     SoQuyTienGuiNHComponent,
+    TongHopBaoCaoComponent,
     SoQuyTongHopComponent,
+    TheKhoComponent,
+    HoaDonMuaVaoComponent,
+
+
     PreviewSQTMComponent,
     PrintTKComponent,
     PrintCanDoiKeToanComponent,
     PrintNhatKyChungComponent,
     PreviewComponent,
     PreviewSQTNHComponent,
-    TongHopBaoCaoComponent
+    PreviewTheKhoComponent,
+    PreviewHDMVComponent
+   
 
     
     // SimpleTinyComponent

@@ -44,6 +44,9 @@ export class SidebarMenuComponent implements OnInit {
       showSubmenuRpbank : false,
     
       showSubmenujournal : false,
+
+      showInventory : false,
+      showTax : false,
     };
   }
 

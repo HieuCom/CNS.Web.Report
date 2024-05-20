@@ -20,6 +20,10 @@ import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
 import { SoQuyTienGuiNHComponent } from './SoTienGuiNH/soquytienguinh.component';
 import { SoQuyTongHopComponent } from './SoTienGuiNH/tonghop.component';
 import { TongHopBaoCaoComponent } from './TongHopBaoCao/tonghopbaocao.component';
+import { TheKhoComponent } from './TheKho/thekho.component';
+import { PreviewTheKhoComponent } from './TheKho/preview-thekho.component';
+import { HoaDonMuaVaoComponent } from './HoaDonMuaVao/hoadonmuavao.component';
+import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.component';
 
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
@@ -34,13 +38,20 @@ const routes: Routes = [
     { path: 'soquytienmat', component: SoQuyTienMatComponent },
     { path: 'sotienguinh', component: SoQuyTienGuiNHComponent },
     { path: 'soquytonghop', component: SoQuyTongHopComponent },
+    {path: 'tonghopbaocao', component: TongHopBaoCaoComponent},
+    {path: 'thekho', component: TheKhoComponent},
+    {path: 'hoadonmuavao', component: HoaDonMuaVaoComponent},
+
+    
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
     {path: 'printTK', component: PrintTKComponent},
     {path: 'printNKC', component: PrintNhatKyChungComponent},
     {path: 'print', component: PreviewComponent},
     {path: 'prinSQTM', component: PreviewSQTMComponent},
     {path: 'printSQTGNH', component: PreviewSQTNHComponent},
-    {path: 'tonghopbaocao', component: TongHopBaoCaoComponent},
+    {path: 'printTheKho', component: PreviewTheKhoComponent},
+    {path: 'printHDMV', component: PreviewHDMVComponent},
+    
     
 
 ];
