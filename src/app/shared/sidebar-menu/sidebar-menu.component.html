@@ -108,7 +108,7 @@
                     <ul >
                       <li *ngIf="userLevel < 3"><a routerLink="inventory/thekho" routerLinkActive="active">Thẻ Kho</a></li>
                       <li *ngIf="userLevel < 3"><a routerLink="inventory/nhapxuattk" routerLinkActive="active">Tổng hợp nhập xuất</a></li>
-               
+                      <li *ngIf="userLevel < 3"><a routerLink="inventory/sochitietkho" routerLinkActive="active">Sổ chi tiết</a></li>
               
                   </ul>
             </div> 
@@ -132,8 +132,8 @@
           <a (click)="toggleSubmenu('showTax')" routerLinkActive="active">Báo cáo thuế</a> 
           <div [style.display]="submenus.showTax ? 'block' : 'none'" class="sub__menu-lv2">            
                   <ul >
-                    <li *ngIf="userLevel < 3"><a routerLink="inventory/hoadonmuavao" routerLinkActive="active">Tờ khai thuế GTGT</a></li>
-                   
+                    <li *ngIf="userLevel < 3"><a routerLink="inventory/hoadonmuavao" routerLinkActive="active">Tờ khai thuế GTGT mua vào</a></li>
+                    <li *ngIf="userLevel < 3"><a routerLink="inventory/hoadonbanra" routerLinkActive="active">Tờ khai thuế GTGT bán ra</a></li>
              
             
                 </ul>

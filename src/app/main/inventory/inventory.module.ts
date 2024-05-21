@@ -43,6 +43,9 @@ import { TheKhoComponent } from './TheKho/thekho.component';
 import { PreviewTheKhoComponent } from './TheKho/preview-thekho.component';
 import { HoaDonMuaVaoComponent } from './HoaDonMuaVao/hoadonmuavao.component';
 import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.component';
+import { HoaDonBanRaComponent } from './HoaDonMuaVao/hoadonbanra.component';
+import { SoChiTietKhoComponent } from './SoChiTietKho/sochitietkho.component';
+import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.component';
 
 @NgModule({
   imports: [
@@ -79,6 +82,8 @@ import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.compon
     SoQuyTongHopComponent,
     TheKhoComponent,
     HoaDonMuaVaoComponent,
+    HoaDonBanRaComponent,
+    SoChiTietKhoComponent,
 
 
     PreviewSQTMComponent,
@@ -88,7 +93,8 @@ import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.compon
     PreviewComponent,
     PreviewSQTNHComponent,
     PreviewTheKhoComponent,
-    PreviewHDMVComponent
+    PreviewHDMVComponent,
+    PreviewSCTKComponent
    
 
     
