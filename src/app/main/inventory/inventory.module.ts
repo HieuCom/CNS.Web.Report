@@ -46,6 +46,9 @@ import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.compon
 import { HoaDonBanRaComponent } from './HoaDonMuaVao/hoadonbanra.component';
 import { SoChiTietKhoComponent } from './SoChiTietKho/sochitietkho.component';
 import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.component';
+import { SoChiTietCongNoComponent } from './SoChiTietCongNo/sochitietcongno.component';
+import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.component';
+
 
 @NgModule({
   imports: [
@@ -84,6 +87,7 @@ import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.compon
     HoaDonMuaVaoComponent,
     HoaDonBanRaComponent,
     SoChiTietKhoComponent,
+    SoChiTietCongNoComponent,
 
 
     PreviewSQTMComponent,
@@ -94,7 +98,9 @@ import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.compon
     PreviewSQTNHComponent,
     PreviewTheKhoComponent,
     PreviewHDMVComponent,
-    PreviewSCTKComponent
+    PreviewSCTKComponent,
+    PreviewSCCNComponent
+    
    
 
     

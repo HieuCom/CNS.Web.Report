@@ -115,8 +115,8 @@
          </div>
 
          <div class="sub__menu-item" *ngIf="userLevel < 3" >   
-          <a (click)="toggleSubmenu('showTax')" routerLinkActive="active">Báo cáo tài chính</a> 
-          <div [style.display]="submenus.showTax ? 'block' : 'none'" class="sub__menu-lv2">            
+          <a (click)="toggleSubmenu('showFinace')" routerLinkActive="active">Báo cáo tài chính</a> 
+          <div [style.display]="submenus.showFinace ? 'block' : 'none'" class="sub__menu-lv2">            
                   <ul >
                     <li *ngIf="userLevel < 3"><a routerLink="inventory/candoi" routerLinkActive="active">Bảng cân đối kế toán</a></li>
                     <li *ngIf="userLevel < 3"><a routerLink="inventory/hoatdong" routerLinkActive="active">Báo cáo hoạt động sản xuất kinh doanh</a></li>
@@ -139,6 +139,18 @@
                 </ul>
           </div> 
        </div>
+
+       <div class="sub__menu-item" *ngIf="userLevel < 3" >   
+        <a (click)="toggleSubmenu('showOwe')" routerLinkActive="active">Báo cáo công nợ</a> 
+        <div [style.display]="submenus.showOwe ? 'block' : 'none'" class="sub__menu-lv2">            
+                <ul >
+                  <li *ngIf="userLevel < 3"><a routerLink="inventory/sochitietcongno" routerLinkActive="active">Sổ Chi Tiết Công Nợ</a></li>
+               
+           
+          
+              </ul>
+        </div> 
+     </div>
 
               
          

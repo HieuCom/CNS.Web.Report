@@ -27,6 +27,8 @@ import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.compon
 import { HoaDonBanRaComponent } from './HoaDonMuaVao/hoadonbanra.component';
 import { SoChiTietKhoComponent } from './SoChiTietKho/sochitietkho.component';
 import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.component';
+import { SoChiTietCongNoComponent } from './SoChiTietCongNo/sochitietcongno.component';
+import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.component';
 
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
@@ -46,6 +48,7 @@ const routes: Routes = [
     {path: 'hoadonmuavao', component: HoaDonMuaVaoComponent},
     {path: 'hoadonbanra', component: HoaDonBanRaComponent},
     {path: 'sochitietkho', component: SoChiTietKhoComponent},
+    {path: 'sochitietcongno', component: SoChiTietCongNoComponent},
 
     
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
@@ -57,6 +60,7 @@ const routes: Routes = [
     {path: 'printTheKho', component: PreviewTheKhoComponent},
     {path: 'printHDMV', component: PreviewHDMVComponent},
     {path: 'printSCTK', component: PreviewSCTKComponent},
+    {path: 'printSCCN', component: PreviewSCCNComponent},
     
     
 
