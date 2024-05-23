@@ -33,8 +33,7 @@ import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.componen
 import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
 import { PreviewComponent } from './Preview/preview.component';
 import { SoChiTietTKComponent } from './TheoDoiHoatDong/sochitiettk.component';
-import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
-import { PreviewSQTMComponent } from './SoQuyTienMat/preview-sqtm.component';
+
 import { SoQuyTienGuiNHComponent } from './SoTienGuiNH/soquytienguinh.component';
 import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
 import { SoQuyTongHopComponent } from './SoTienGuiNH/tonghop.component';
@@ -48,6 +47,10 @@ import { SoChiTietKhoComponent } from './SoChiTietKho/sochitietkho.component';
 import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.component';
 import { SoChiTietCongNoComponent } from './SoChiTietCongNo/sochitietcongno.component';
 import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.component';
+import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
+import { PreviewSQTMComponent } from './SoQuyTienMat/preview-sqtm.component';
+import { BangKeChungTuComponent } from './BanKeChungTu/bangkechungtu.component';
+import { PreviewBKCTComponent } from './BanKeChungTu/preview-bkct.component';
 
 
 @NgModule({
@@ -88,6 +91,7 @@ import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.
     HoaDonBanRaComponent,
     SoChiTietKhoComponent,
     SoChiTietCongNoComponent,
+    BangKeChungTuComponent,
 
 
     PreviewSQTMComponent,
@@ -99,7 +103,8 @@ import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.
     PreviewTheKhoComponent,
     PreviewHDMVComponent,
     PreviewSCTKComponent,
-    PreviewSCCNComponent
+    PreviewSCCNComponent,
+    PreviewBKCTComponent
     
    
 

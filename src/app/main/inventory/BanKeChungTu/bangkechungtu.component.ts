@@ -1,3 +1,4 @@
+
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { MessageContstants } from 'src/app/core/common/message.constants';
@@ -7,11 +8,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NavigationExtras, Router } from '@angular/router';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 @Component({
-  selector: 'app-soquytienmat',
-  templateUrl: './soquytienmat.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-bangkechungtu',
+  templateUrl: './bangkechungtu.component.html',
+  styleUrls: ['./bangkechungtu.component.css']
 })
-export class SoQuyTienMatComponent implements OnInit {
+export class BangKeChungTuComponent implements OnInit {
 
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
@@ -31,8 +32,8 @@ export class SoQuyTienMatComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'Sổ Quỹ Tiền Mặt';
-  public ma_tk: string = '111';
+  public nametable= 'Bảng kê chứng từ';
+  public ma_tk: string = '1121';
 
   bsModalRef: BsModalRef;
   
@@ -61,12 +62,14 @@ export class SoQuyTienMatComponent implements OnInit {
   
     try {
     
-      const response: any = await this.dataService.postCanDoiKeToan('/SoQuyTienMat', 
-      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate), MA_TK : this.ma_tk
+      const response: any = await this.dataService.postCanDoiKeToan('/BangKeChungTu', 
+      { TU_NGAY:this.getNowUTC(this.fromDate),
+         DEN_NGAY : this.getNowUTC(this.toDate), 
+         MA_TK : this.ma_tk
 
       }).toPromise();
       this.nhapkhos = response;
-      console.log(this.nhapkhos.length);
+      console.log(this.nhapkhos[0].TEN_TK);
     } catch (error) {
       console.error('An error occurred:', error); 
     }
@@ -85,7 +88,7 @@ export class SoQuyTienMatComponent implements OnInit {
         chungtus: this.nhapkhos
       }
     };
-    this.router.navigate(['/main/inventory/prinSQTM'], navigationExtras);
+    this.router.navigate(['/main/inventory/printBKCT'], navigationExtras);
     
   }
   getTotal(chungtus, groupName, field) {
@@ -139,43 +142,43 @@ export class SoQuyTienMatComponent implements OnInit {
         "Format": ""
       },
       {
+        "Name": "MA_TK",
+        "Caption": "Mã TK",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "TEN_TK",
+        "Caption": "Tên TK ĐƯ",
+        "Width": 70,
+        "Format": ""
+      },
+      {
+        "Name": "",
+        "Caption": "Mã TK ĐƯ",
+        "Width": 50,
+        "Format": ""
+      },
+
+      {
         "Name": "DIEN_GIAI",
         "Caption": "Diễn giải", 
         "Width": 70,
         "Format": ""
       },
-
-      {
-        "Name": "ONG_BA",
-        "Caption": "Ông bà",
-        "Width": 50,
-        "Format": ""
-      },
-
-      {
-        "Name": "TK_DOI_UNG",
-        "Caption": "TK đối ứng",
-        "Width": 50,
-        "Format": ""
-      },
       {
         "Name": "PS_NO",
-        "Caption": "Thu tiền",
+        "Caption": "PS Nợ",
         "Width": 50,
         "Format": "#,##0.##;(#,##0.##);#"
       },
       {
         "Name": "PS_CO",
-        "Caption": "Chi tiền",
+        "Caption": "PS Có",
         "Width": 50,
         "Format": "#,##0.##;(#,##0.##);#"
       },
-      {
-        "Name": "TON_QUY",
-        "Caption": "Tồn Quỹ",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
+      
       
     
   ]

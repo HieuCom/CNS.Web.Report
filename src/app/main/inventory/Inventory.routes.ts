@@ -12,8 +12,6 @@ import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.componen
 import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
 import { PreviewComponent } from './Preview/preview.component';
 import { SoChiTietTKComponent } from './TheoDoiHoatDong/sochitiettk.component';
-import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
-import { PreviewSQTMComponent } from './SoQuyTienMat/preview-sqtm.component';
 
 import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
 
@@ -29,6 +27,9 @@ import { SoChiTietKhoComponent } from './SoChiTietKho/sochitietkho.component';
 import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.component';
 import { SoChiTietCongNoComponent } from './SoChiTietCongNo/sochitietcongno.component';
 import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.component';
+import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
+import { PreviewBKCTComponent } from './BanKeChungTu/preview-bkct.component';
+import { BangKeChungTuComponent } from './BanKeChungTu/bangkechungtu.component';
 
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
@@ -49,18 +50,20 @@ const routes: Routes = [
     {path: 'hoadonbanra', component: HoaDonBanRaComponent},
     {path: 'sochitietkho', component: SoChiTietKhoComponent},
     {path: 'sochitietcongno', component: SoChiTietCongNoComponent},
+    {path: 'bangkechungtu', component: BangKeChungTuComponent},
 
     
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
     {path: 'printTK', component: PrintTKComponent},
     {path: 'printNKC', component: PrintNhatKyChungComponent},
     {path: 'print', component: PreviewComponent},
-    {path: 'prinSQTM', component: PreviewSQTMComponent},
+    {path: 'prinSQTM', component: PreviewBKCTComponent},
     {path: 'printSQTGNH', component: PreviewSQTNHComponent},
     {path: 'printTheKho', component: PreviewTheKhoComponent},
     {path: 'printHDMV', component: PreviewHDMVComponent},
     {path: 'printSCTK', component: PreviewSCTKComponent},
     {path: 'printSCCN', component: PreviewSCCNComponent},
+    {path: 'printBKCT', component: PreviewBKCTComponent},
     
     
 

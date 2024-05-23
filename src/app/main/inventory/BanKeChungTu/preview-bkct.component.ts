@@ -12,10 +12,10 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 
 @Component({
   selector: 'app-printBKCT',
-  templateUrl: './preview-sqtm.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  templateUrl: './preview-bkct.component.html',
+  styleUrls: ['./bangkechungtu.component.css']
 })
-export class PreviewSQTMComponent implements OnInit {
+export class PreviewBKCTComponent implements OnInit {
   public fromDate: string ='';
   public toDate: string = '';
   public chungtus: any[];
