@@ -48,7 +48,9 @@ export class SidebarMenuComponent implements OnInit {
       showInventory : false,
       showTax : false,
       showFinace : false,
-      showOwe :false
+      showOwe :false,
+      showCommodity:false
+
     };
   }
 

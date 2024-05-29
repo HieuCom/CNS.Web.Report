@@ -30,6 +30,10 @@ import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.
 import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
 import { PreviewBKCTComponent } from './BanKeChungTu/preview-bkct.component';
 import { BangKeChungTuComponent } from './BanKeChungTu/bangkechungtu.component';
+import { BaoCaoLaiLoComponent } from './BaoCaoLaiLo/baocaolailo.component';
+import { PreviewBCLLComponent } from './BaoCaoLaiLo/preview-baocaolailo.component';
+import { BangKeBanHangComponent } from './BangKeBanHang/bangkebanhang.component';
+import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.component';
 
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
@@ -51,6 +55,8 @@ const routes: Routes = [
     {path: 'sochitietkho', component: SoChiTietKhoComponent},
     {path: 'sochitietcongno', component: SoChiTietCongNoComponent},
     {path: 'bangkechungtu', component: BangKeChungTuComponent},
+    {path: 'baocaolailo', component: BaoCaoLaiLoComponent},
+    {path: 'bangkebanhang', component: BangKeBanHangComponent},
 
     
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
@@ -64,6 +70,8 @@ const routes: Routes = [
     {path: 'printSCTK', component: PreviewSCTKComponent},
     {path: 'printSCCN', component: PreviewSCCNComponent},
     {path: 'printBKCT', component: PreviewBKCTComponent},
+    {path: 'printBCLL', component: PreviewBCLLComponent},
+    {path: 'printBKBH', component: PreviewBKBHComponent},
     
     
 

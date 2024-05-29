@@ -11,24 +11,23 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-printSCCN',
-  templateUrl: './preview-sochitietcongno.component.html',
-  styleUrls: ['./sochitietcongno.component.css']
+  selector: 'app-printBCLL',
+  templateUrl: './preview-baocaolailo.component.html',
+  styleUrls: ['./baocaolailo.component.css']
 })
-export class PreviewSCCNComponent implements OnInit {
-  public fromDate: Date = new Date();
-  public toDate: Date = new Date();
+export class PreviewBCLLComponent implements OnInit {
+  public fromDate: string ='';
+  public toDate: string = '';
   public chungtus: any[];
   public pageNumber: number = 1;
   public pageSize: number = 20;
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
-  public ma_tk: string ;
+
   
   public nametable :string ;
- 
-
+  public namewh :string ;
   
   public stringheadtable:string =`
   <tr>
@@ -79,7 +78,7 @@ export class PreviewSCCNComponent implements OnInit {
   ngOnInit() {
     var user = this._authenService.getLoggedInUser();
     this.getUserIdLogin(user.username);
-    this.loadData();
+
 
   
     //get param from component
@@ -88,53 +87,22 @@ export class PreviewSCCNComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
-      this.ma_tk = params['ma_tk']
-      
-      
-      // .split('-').reverse().join('/')
+   
      
     });
 
-    
-   
+    this.chungtus = history.state.chungtus;
+    this.chungtus.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0));
+    //this.loadData();
 
   }
-  async loadData() {
-  
-    try {
-    
-      const response : any = await this._dataService.postCanDoiKeToan('/TongHopPS',{
-        TU_NGAY: this.getNowUTC(this.toDate),
-        DEN_NGAY:this.getNowUTC(this.fromDate),
-        MA_TK: "131",  
-        ID_DV: 1,
-        ID_DT: 0,  //1117
-
-      }).toPromise();
-      this.chungtus = response;
-      console.log(this.chungtus[1])
-      this.chungtus.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
-    
-    } catch (error) {
-      console.error('An error occurred:', error); 
-    }
-    
- 
-  }
-
-  
-
 
   
   getTotal(chungtus, groupName, field) {
     return chungtus
-      .filter(chungtu => chungtu.NGAY_CT === groupName)
+      .filter(chungtu => chungtu.MA_NL === groupName)
       .reduce((sum, chungtu) => sum + chungtu[field], 0);
-} 
-  getSum(chungtus, field){
-    return  chungtus
-    .reduce((sum,chungtu)=> sum + chungtu[field],0  )   
-  }
+}
 
   async getUserIdLogin(userName) {
     if (userName) {
@@ -151,70 +119,46 @@ export class PreviewSCCNComponent implements OnInit {
 
   public columnInfonhapkho: any[] = [
     {
-      "Name": "NGAY_CT",
-      "Width": 20,
-      "Format": ""
-    },
-    {
-      "Name": "SO_CT",
+      "Name": "MA_NL",
+      "Caption": "MÃ HH",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "SO_CT",
+      "Name": "TEN_NL",
+      "Caption": "Tên Hàng",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "DIEN_GIAI",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "GIA_VON",
-     
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-      "Name": "SO_LUONG_NHAP",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "TIEN_NHAP",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-      "Name": "SO_LUONG_XUAT",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "TIEN_XUAT",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-      "Name": "SO_LUONG_TON",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "TIEN_TON",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    }
+        "Name": "TEN_DVT",
+        "Caption": "ĐVT",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "SO_LUONG",
+        "Caption": "SL", 
+        "Width": 70,
+        "Format": ""
+      },
+
+      {
+        "Name": "TIEN_VON",
+        "Caption": "Tiền Vốn",
+        "Width": 90,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+
+      {
+        "Name": "TIEN_BAN",
+        "Caption": "Doanh Thu",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      }
       
     
   ]
-
-  private getNowUTC(now : Date ) {
-   
-    return new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
-  }
-
  
   
 

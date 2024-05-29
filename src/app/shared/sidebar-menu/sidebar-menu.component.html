@@ -105,6 +105,18 @@
         </div> 
      </div>
 
+     <div class="sub__menu-item" *ngIf="userLevel < 3" >   
+      <a (click)="toggleSubmenu('showCommodity')" routerLinkActive="active">Báo cáo Hàng Hóa Vật Tư</a> 
+      <div [style.display]="submenus.showCommodity ? 'block' : 'none'" class="sub__menu-lv2">            
+              <ul >
+                <li *ngIf="userLevel < 3"><a routerLink="inventory/baocaolailo" routerLinkActive="active">Báo Cáo Lãi Lỗ</a></li>
+                <li *ngIf="userLevel < 3"><a routerLink="inventory/bangkebanhang" routerLinkActive="active">Bảng kê bán hàng</a></li>
+         
+        
+            </ul>
+      </div> 
+   </div>
+
               
          
           </div>

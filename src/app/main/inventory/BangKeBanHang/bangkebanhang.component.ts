@@ -7,11 +7,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NavigationExtras, Router } from '@angular/router';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 @Component({
-  selector: 'app-sochitietcongno',
-  templateUrl: './sochitietcongno.component.html',
-  styleUrls: ['./sochitietcongno.component.css']
+  selector: 'app-bangkebanhang',
+  templateUrl: './bangkebanhang.component.html',
+  styleUrls: ['./bangkebanhang.component.css']
 })
-export class SoChiTietCongNoComponent implements OnInit {
+export class BangKeBanHangComponent implements OnInit {
 
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
@@ -31,12 +31,9 @@ export class SoChiTietCongNoComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'SỔ CHI TIẾT CÔNG NỢ';
+  public nametable= 'Bảng Kê Bán Hàng';
 
-  public ID_KHO: number = 0;
 
-  public ma_tk: string = '131' ;
- 
 
 
 
@@ -67,16 +64,18 @@ export class SoChiTietCongNoComponent implements OnInit {
   
     try {
     
-      const response: any = await this.dataService.postCanDoiKeToan('/SoChiTietCongNo', 
+      const response: any = await this.dataService.postCanDoiKeToan('/BangKeBanHang', 
       { TU_NGAY:this.getNowUTC(this.fromDate), 
-        DEN_NGAY : this.getNowUTC(this.toDate),
-        MA_TK:this.ma_tk
-
-
+        DEN_NGAY : this.getNowUTC(this.toDate), 
+        ID_DV:"1",
+        ID_KHO:"0",
+        ID_NL:"0",
+        UserID:"1",
+        BIT_LOAI_NL:33,
+        ID_LOAI_CT:"5"
       }).toPromise();
       this.nhapkhos = response;
-      this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
-    
+  
     } catch (error) {
       console.error('An error occurred:', error); 
     }
@@ -87,18 +86,16 @@ export class SoChiTietCongNoComponent implements OnInit {
   chuyen(){
     let navigationExtras: NavigationExtras = {
       queryParams: {
-        'fromDate':this.getNowUTC(this.toDate),
-        'toDate':this.getNowUTC(this.fromDate),
-        'nametable': this.nametable,
-        'ma_tk': this.ma_tk,
-  
-        
+        'fromDate':this.getNowUTC(this.fromDate).toISOString().slice(0, 10),
+        'toDate':this.getNowUTC(this.toDate).toISOString().slice(0, 10),
+        'nametable': this.nametable
+      
       } ,
       state: {
         chungtus: this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
       }
     };
-    this.router.navigate(['/main/inventory/printSCCN'], navigationExtras);
+    this.router.navigate(['/main/inventory/printBCLL'], navigationExtras);
    
     
   }
@@ -128,93 +125,91 @@ export class SoChiTietCongNoComponent implements OnInit {
   }
   
 
-  pageChanged(event: any): void {
-    this.pageNumber = event.page;
-    this.loadData();
-  }
-  onChangePageSize() {
-    this.loadData();
-  }
 
 
 
   
   public columnInfonhapkho: any[] = [
-  
     {
-      "Name": "NGAY_CT",
-      "Caption": "Ngày CT",
+      "Name": "MA_NL",
+      "Caption": "NGAY_CT",
       "Width": 50,
       "Format": "d"
     },
-   
     {
       "Name": "SO_CT",
-      "Caption": "Số chứng từ",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-     
-      "Caption": "Mã đối tượng",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-     
-      "Caption": "Tên đối tượng",
+      "Caption": "Số CT",
       "Width": 50,
       "Format": ""
     },
     {
       "Name": "DIEN_GIAI",
-      "Caption": "Diễn giải",
+      "Caption": "Diên Giải",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "MA_TK",
-      "Caption": "Mã TK",
-      "Width": 30,
-      "Format": ""
-    },
-    {
-      "Name": "MA_TK_DU",
-      "Caption": "TK DƯ",
-      "Width": 30,
-      "Format": ""
-    },
-  
-      {
-        "Name": "PS_NO",
-        "Caption": "PS nợ",
-        "Width": 30,
+        "Name": "TEN_DVT",
+        "Caption": "ĐVT",
+        "Width": 50,
         "Format": ""
       },
       {
-        "Name": "PS_CO",
-        "Caption": "PS có",
-        "Width": 30,
+        "Name": "TK_DU",
+        "Caption": "TK ĐƯ",
+        "Width": 50,
         "Format": ""
       },
       {
-        "Name": "PS_NO_NT",
-        "Caption": "PS nợ(NT)",
-        "Width": 30,
+        "Name": "SO_LUONG",
+        "Caption": "SL", 
+        "Width": 70,
         "Format": ""
       },
       {
-        "Name": "PS_CO_NT",
-        "Caption": "PS có(NT)",
-        "Width": 30,
+        "Name": "GIA_VON",
+        "Caption": "Giá Vốn",
+        "Width": 50,
         "Format": ""
       },
-     
-     
-    
+
+      {
+        "Name": "TIEN_VON",
+        "Caption": "Tiền Vốn",
+        "Width": 90,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+
+      {
+        "Name": "GIA2",
+        "Caption": "Giá Bán",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "TIEN_BAN",
+        "Caption": "Tiền Bán",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "TIEN_BAN",
+        "Caption": "Thuế GTGT",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "TIEN_BAN",
+        "Caption": "Tiền Thanh Toán",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      
+      
       
       
     
   ]
+ 
   
 }

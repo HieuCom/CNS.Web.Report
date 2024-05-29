@@ -51,6 +51,10 @@ import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
 import { PreviewSQTMComponent } from './SoQuyTienMat/preview-sqtm.component';
 import { BangKeChungTuComponent } from './BanKeChungTu/bangkechungtu.component';
 import { PreviewBKCTComponent } from './BanKeChungTu/preview-bkct.component';
+import { BaoCaoLaiLoComponent } from './BaoCaoLaiLo/baocaolailo.component';
+import { PreviewBCLLComponent } from './BaoCaoLaiLo/preview-baocaolailo.component';
+import { BangKeBanHangComponent } from './BangKeBanHang/bangkebanhang.component';
+import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.component';
 
 
 @NgModule({
@@ -92,6 +96,8 @@ import { PreviewBKCTComponent } from './BanKeChungTu/preview-bkct.component';
     SoChiTietKhoComponent,
     SoChiTietCongNoComponent,
     BangKeChungTuComponent,
+    BaoCaoLaiLoComponent,
+    BangKeBanHangComponent,
 
 
     PreviewSQTMComponent,
@@ -104,7 +110,9 @@ import { PreviewBKCTComponent } from './BanKeChungTu/preview-bkct.component';
     PreviewHDMVComponent,
     PreviewSCTKComponent,
     PreviewSCCNComponent,
-    PreviewBKCTComponent
+    PreviewBKCTComponent,
+    PreviewBCLLComponent,
+    PreviewBKBHComponent
     
    
 

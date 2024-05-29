@@ -21,9 +21,16 @@
     <!-- <div [innerHTML]="safeHtml"></div> -->
     <div class="table-responsive">
       <h2 class="nametb" >{{this.nametable}}</h2>
-      <p class="time" >Từ ngày:{{ this.fromDate.split('-').reverse().join('/') }} đến ngày: {{ this.toDate.split('-').reverse().join('/') }} </p>
+      <p class="time" >Từ ngày:{{ this.fromDate}} đến ngày: {{ this.toDate }} </p>
      
       <p class="nametb" >Tên tài khoản:{{this.ma_tk}}</p>
+
+      <div class="sum" >
+         <p>Dư có đầu ngày : {{getSum(chungtus,'DK')| number}} </p>
+         <p>Phát sinh nợ</p>
+         <p>Phát sinh có</p>
+         <p>Dư có cuối ngày: {{getSum(chungtus,'CK')| number}} </p>
+      </div>
       
       <table class="table table-bordered">
       
@@ -59,25 +66,25 @@
            
         <tbody>
           <ng-container *ngFor="let chungtu of chungtus ; let i = index">
-            <ng-container *ngIf="i == 0 || chungtus[i].SO_CT != chungtus[i-1].SO_CT">
+           
               <tr>
-                <td style="text-align: center;" rowspan="3" colspan="3">{{chungtu.DIEN_GIAI}}</td>
+                <td style="text-align: center;" rowspan="3" colspan="3">{{chungtu.TEN_DT}} ({{chungtu.MA_DT}}) </td>
                 <td>Dư đầu</td>
-                <td>{{getTotal(chungtus,chungtu.NGAY_CT,'PS_CO')}} </td>
-                <td></td>
+                <td>{{chungtu.DKN}} </td>
+                <td>{{chungtu.DKC}}</td>
               </tr>
               <tr>
                 <td>Phát sinh</td>
-                <td></td>
-                <td></td>
+                <td>{{chungtu.PSN}}</td>
+                <td>{{chungtu.PSC}}</td>
               </tr>
               <tr>
                 <td>Dư cuối</td>
-                <td>{{getTotal(chungtus,chungtu.NGAY_CT,'PS_CO')}} </td>
-                <td></td>
+                <td>{{chungtu.CKN}} </td>
+                <td>{{chungtu.CKC}} </td>
               </tr>
             </ng-container>
-          </ng-container>
+      
         </tbody>
       </table>
       </div>
