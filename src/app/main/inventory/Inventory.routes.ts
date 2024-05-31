@@ -34,6 +34,8 @@ import { BaoCaoLaiLoComponent } from './BaoCaoLaiLo/baocaolailo.component';
 import { PreviewBCLLComponent } from './BaoCaoLaiLo/preview-baocaolailo.component';
 import { BangKeBanHangComponent } from './BangKeBanHang/bangkebanhang.component';
 import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.component';
+import { PreviewToKhaiThueComponent } from './ToKhaiThue/preview-tokhaithue.component';
+import { ToKhaiThueComponent } from './ToKhaiThue/tokhaithue.component';
 
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
@@ -57,6 +59,7 @@ const routes: Routes = [
     {path: 'bangkechungtu', component: BangKeChungTuComponent},
     {path: 'baocaolailo', component: BaoCaoLaiLoComponent},
     {path: 'bangkebanhang', component: BangKeBanHangComponent},
+    {path: 'tokhaithue', component: ToKhaiThueComponent},
 
     
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
@@ -72,6 +75,7 @@ const routes: Routes = [
     {path: 'printBKCT', component: PreviewBKCTComponent},
     {path: 'printBCLL', component: PreviewBCLLComponent},
     {path: 'printBKBH', component: PreviewBKBHComponent},
+    {path: 'printTKT', component: PreviewToKhaiThueComponent},
     
     
 

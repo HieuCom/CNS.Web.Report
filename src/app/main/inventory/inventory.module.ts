@@ -55,6 +55,8 @@ import { BaoCaoLaiLoComponent } from './BaoCaoLaiLo/baocaolailo.component';
 import { PreviewBCLLComponent } from './BaoCaoLaiLo/preview-baocaolailo.component';
 import { BangKeBanHangComponent } from './BangKeBanHang/bangkebanhang.component';
 import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.component';
+import { PreviewToKhaiThueComponent } from './ToKhaiThue/preview-tokhaithue.component';
+import { ToKhaiThueComponent } from './ToKhaiThue/tokhaithue.component';
 
 
 @NgModule({
@@ -98,6 +100,7 @@ import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.comp
     BangKeChungTuComponent,
     BaoCaoLaiLoComponent,
     BangKeBanHangComponent,
+    ToKhaiThueComponent,
 
 
     PreviewSQTMComponent,
@@ -112,7 +115,8 @@ import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.comp
     PreviewSCCNComponent,
     PreviewBKCTComponent,
     PreviewBCLLComponent,
-    PreviewBKBHComponent
+    PreviewBKBHComponent,
+    PreviewToKhaiThueComponent
     
    
 
