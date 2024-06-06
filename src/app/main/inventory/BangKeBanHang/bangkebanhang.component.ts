@@ -132,9 +132,9 @@ export class BangKeBanHangComponent implements OnInit {
   public columnInfonhapkho: any[] = [
     {
       "Name": "MA_NL",
-      "Caption": "NGAY_CT",
+      "Caption": "Mã NL",
       "Width": 50,
-      "Format": "d"
+      "Format": ""
     },
     {
       "Name": "SO_CT",
