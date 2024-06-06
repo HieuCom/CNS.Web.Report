@@ -139,7 +139,7 @@ export class SoNhatKyChungComponent implements OnInit {
       {
         "Name": "TEN_TK",
         "Caption": "Tên tài khoản",
-        "Width": 50,
+        "Width": 80,
         "Format": ""
       },
       {
