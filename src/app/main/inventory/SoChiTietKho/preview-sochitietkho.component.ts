@@ -11,11 +11,11 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-printBKCT',
-  templateUrl: './preview-sqtm.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-printSCTK',
+  templateUrl: './preview-sochitietkho.component.html',
+  styleUrls: ['./sochitietkho.component.css']
 })
-export class PreviewSQTMComponent implements OnInit {
+export class PreviewSCTKComponent implements OnInit {
   public fromDate: string ='';
   public toDate: string = '';
   public chungtus: any[];
@@ -24,9 +24,12 @@ export class PreviewSQTMComponent implements OnInit {
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
-  public ma_tk: string = '111';
+  public ma_tk: string = '1331';
   
   public nametable :string ;
+  public namewh :string="Kho hàng"; 
+  public tenhang :string = "BIENBAOCAO-Biển báo cáo";
+
   
   public stringheadtable:string =`
   <tr>
@@ -86,6 +89,8 @@ export class PreviewSQTMComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
+      
+      
       // .split('-').reverse().join('/')
      
     });
@@ -118,40 +123,61 @@ export class PreviewSQTMComponent implements OnInit {
 
   public columnInfonhapkho: any[] = [
     {
+      "Name": "NGAY_CT",
+      "Width": 20,
+      "Format": ""
+    },
+    {
       "Name": "SO_CT",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "NGAY_CT",
-      "Caption": "Tên Hàng Hóa ,Vật Tư ", 
-      "Width": 70,
-      "Format": "d"
+      "Name": "SO_CT",
+      "Width": 50,
+      "Format": ""
     },
     {
       "Name": "DIEN_GIAI",
-      "Caption": "Đơn Vị Tính",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "MA_TK",
-      "Caption": "Lượng Đầu Kỳ",
+      "Name": "GIA_VON",
+     
+      "Width": 50,
+      "Format": "#,##0.##;(#,##0.##);#"
+    },
+    {
+      "Name": "SO_LUONG_NHAP",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "PS_NO",
-      "Caption": "Phát sinh nợ",
+      "Name": "TIEN_NHAP",
       "Width": 50,
       "Format": "#,##0.##;(#,##0.##);#"
     },
     {
-      "Name": "PS_CO",
-      "Caption": "Phát sinh có",
+      "Name": "SO_LUONG_XUAT",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "TIEN_XUAT",
       "Width": 50,
       "Format": "#,##0.##;(#,##0.##);#"
     },
+    {
+      "Name": "SO_LUONG_TON",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "TIEN_TON",
+      "Width": 50,
+      "Format": "#,##0.##;(#,##0.##);#"
+    }
       
     
   ]

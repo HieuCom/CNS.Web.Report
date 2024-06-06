@@ -7,11 +7,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NavigationExtras, Router } from '@angular/router';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 @Component({
-  selector: 'app-soquytienmat',
-  templateUrl: './soquytienmat.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-sochitietkho',
+  templateUrl: './sochitietkho.component.html',
+  styleUrls: ['./sochitietkho.component.css']
 })
-export class SoQuyTienMatComponent implements OnInit {
+export class SoChiTietKhoComponent implements OnInit {
 
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
@@ -31,8 +31,14 @@ export class SoQuyTienMatComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'Sổ Quỹ Tiền Mặt';
-  public ma_tk: string = '111';
+  public nametable= 'SỔ CHI TIẾT HÀNG HÓA';
+
+  public ID_KHO: number = 0;
+
+  public ma_tk: number = 1331 ;
+ 
+
+
 
   bsModalRef: BsModalRef;
   
@@ -61,12 +67,13 @@ export class SoQuyTienMatComponent implements OnInit {
   
     try {
     
-      const response: any = await this.dataService.postCanDoiKeToan('/SoQuyTienMat', 
-      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate), MA_TK : this.ma_tk
+      const response: any = await this.dataService.postCanDoiKeToan('/SoChiTietKho', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate)
 
       }).toPromise();
       this.nhapkhos = response;
-      console.log(this.nhapkhos.length);
+      this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
+    
     } catch (error) {
       console.error('An error occurred:', error); 
     }
@@ -79,13 +86,16 @@ export class SoQuyTienMatComponent implements OnInit {
       queryParams: {
         'fromDate':this.fromDate.toISOString().slice(0, 10),
         'toDate':this.toDate.toISOString().slice(0, 10),
-        'nametable': this.nametable
+        'nametable': this.nametable,
+  
+        
       } ,
       state: {
-        chungtus: this.nhapkhos
+        chungtus: this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
       }
     };
-    this.router.navigate(['/main/inventory/prinSQTM'], navigationExtras);
+    this.router.navigate(['/main/inventory/printSCTK'], navigationExtras);
+   
     
   }
   getTotal(chungtus, groupName, field) {
@@ -127,55 +137,90 @@ export class SoQuyTienMatComponent implements OnInit {
   
   public columnInfonhapkho: any[] = [
     {
+      "Name": "NHAP",
+      "Caption": "Nhập",
+      "Width": 50,
+      "Format": ""
+    },
+    {
       "Name": "NGAY_CT",
       "Caption": "Ngày CT",
       "Width": 50,
       "Format": "d"
     },
+   
     {
-        "Name": "SO_CT",
-        "Caption": "Số chứng từ",
-        "Width": 50,
+      "Name": "SO_CT",
+      "Caption": "Số chứng từ",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "DIEN_GIAI",
+      "Caption": "Diễn giải",
+      "Width": 50,
+      "Format": ""
+    },
+  
+      {
+        "Name": "SO_LUONG",
+        "Caption": "Số lượng",
+        "Width": 30,
         "Format": ""
       },
       {
-        "Name": "DIEN_GIAI",
-        "Caption": "Diễn giải", 
-        "Width": 70,
+        "Name": "GIA_VON",
+        "Caption": "Giá",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "TIEN_VON",
+        "Caption": "Tiền",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+
+      {
+        "Name": "SO_LUONG_NHAP",
+        "Caption": "Số lượng nhập",
+        "Width": 30,
         "Format": ""
       },
 
       {
-        "Name": "ONG_BA",
-        "Caption": "Ông bà",
+        "Name": "TIEN_NHAP",
+        "Caption": "Tiền nhập",
+        "Width": 30,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "SO_LUONG_XUAT",
+        "Caption": "Số lượng xuất",
         "Width": 50,
         "Format": ""
       },
-
       {
-        "Name": "TK_DOI_UNG",
-        "Caption": "TK đối ứng",
-        "Width": 50,
+        "Name": "TIEN_XUAT",
+        "Caption": "Tiền xuất",
+        "Width": 30,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "TEN_KH_HD",
+        "Caption": "Số lượng tồn",
+        "Width": 30,
         "Format": ""
       },
       {
-        "Name": "PS_NO",
-        "Caption": "Thu tiền",
-        "Width": 50,
+        "Name": "TEN_KH_HD",
+        "Caption": "Tiền tồn",
+        "Width": 30,
         "Format": "#,##0.##;(#,##0.##);#"
       },
-      {
-        "Name": "PS_CO",
-        "Caption": "Chi tiền",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "TON_QUY",
-        "Caption": "Tồn Quỹ",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
+     
+    
+      
       
     
   ]

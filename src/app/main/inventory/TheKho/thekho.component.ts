@@ -7,11 +7,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NavigationExtras, Router } from '@angular/router';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 @Component({
-  selector: 'app-soquytienmat',
-  templateUrl: './soquytienmat.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-thekho',
+  templateUrl: './thekho.component.html',
+  styleUrls: ['./thekho.component.css']
 })
-export class SoQuyTienMatComponent implements OnInit {
+export class TheKhoComponent implements OnInit {
 
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
@@ -31,8 +31,16 @@ export class SoQuyTienMatComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'Sổ Quỹ Tiền Mặt';
-  public ma_tk: string = '111';
+  public nametable= 'THẺ KHO';
+
+  public ID_KHO: number = 0;
+
+
+  // lấy từ api /Kho theo ID_KHO
+  public ma_kho: string = 'KHO CÔNG TY';
+  public ten_kho: string = 'Kho công ty';
+
+
 
   bsModalRef: BsModalRef;
   
@@ -61,12 +69,13 @@ export class SoQuyTienMatComponent implements OnInit {
   
     try {
     
-      const response: any = await this.dataService.postCanDoiKeToan('/SoQuyTienMat', 
-      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate), MA_TK : this.ma_tk
+      const response: any = await this.dataService.postCanDoiKeToan('/TheKho', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate), ID_KHO : this.ID_KHO
 
       }).toPromise();
       this.nhapkhos = response;
-      console.log(this.nhapkhos.length);
+      this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
+    
     } catch (error) {
       console.error('An error occurred:', error); 
     }
@@ -79,13 +88,16 @@ export class SoQuyTienMatComponent implements OnInit {
       queryParams: {
         'fromDate':this.fromDate.toISOString().slice(0, 10),
         'toDate':this.toDate.toISOString().slice(0, 10),
-        'nametable': this.nametable
+        'nametable': this.nametable,
+        'ma_kho': this.ma_kho,
+        'ten_kho': this.ten_kho,
       } ,
       state: {
-        chungtus: this.nhapkhos
+        chungtus: this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
       }
     };
-    this.router.navigate(['/main/inventory/prinSQTM'], navigationExtras);
+    this.router.navigate(['/main/inventory/printTheKho'], navigationExtras);
+   
     
   }
   getTotal(chungtus, groupName, field) {
@@ -128,9 +140,15 @@ export class SoQuyTienMatComponent implements OnInit {
   public columnInfonhapkho: any[] = [
     {
       "Name": "NGAY_CT",
-      "Caption": "Ngày CT",
+      "Caption": "Ngày chứng từ",
       "Width": 50,
       "Format": "d"
+    },
+    {
+      "Name": "MA_NL",
+      "Caption": "Ma HH'VT ",
+      "Width": 50,
+      "Format": ""
     },
     {
         "Name": "SO_CT",
@@ -146,35 +164,29 @@ export class SoQuyTienMatComponent implements OnInit {
       },
 
       {
-        "Name": "ONG_BA",
-        "Caption": "Ông bà",
-        "Width": 50,
+        "Name": "TEN_NL",
+        "Caption": "Tên hàng hóa , vật tư",
+        "Width": 90,
         "Format": ""
       },
 
       {
-        "Name": "TK_DOI_UNG",
-        "Caption": "TK đối ứng",
+        "Name": "SO_LUONG_NHAP",
+        "Caption": "Số lượng nhập",
         "Width": 50,
         "Format": ""
       },
       {
-        "Name": "PS_NO",
-        "Caption": "Thu tiền",
+        "Name": "SO_LUONG_XUAT",
+        "Caption": "Số lượng xuất",
         "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
+        "Format": ""
       },
       {
-        "Name": "PS_CO",
-        "Caption": "Chi tiền",
+        "Name": "TK_DOI_UNG",
+        "Caption": "Số lượng tồn",
         "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "TON_QUY",
-        "Caption": "Tồn Quỹ",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
+        "Format": ""
       },
       
     

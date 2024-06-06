@@ -11,11 +11,11 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-printBKCT',
-  templateUrl: './preview-sqtm.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-printTKT',
+  templateUrl: './preview-tokhaithue.component.html',
+  styleUrls: ['./tokhaithue.component.css']
 })
-export class PreviewSQTMComponent implements OnInit {
+export class PreviewToKhaiThueComponent implements OnInit {
   public fromDate: string ='';
   public toDate: string = '';
   public chungtus: any[];
@@ -24,9 +24,10 @@ export class PreviewSQTMComponent implements OnInit {
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
-  public ma_tk: string = '111';
+  public ma_tk: string = 'Kho công ty';
   
   public nametable :string ;
+  public namewh :string ;
   
   public stringheadtable:string =`
   <tr>
@@ -86,12 +87,11 @@ export class PreviewSQTMComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
-      // .split('-').reverse().join('/')
      
     });
 
     this.chungtus = history.state.chungtus;
-    this.chungtus.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0));
+    //this.chungtus.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0));
     //this.loadData();
 
   }
@@ -118,44 +118,32 @@ export class PreviewSQTMComponent implements OnInit {
 
   public columnInfonhapkho: any[] = [
     {
-      "Name": "SO_CT",
+      "Name": "STT",
+      "Caption": "STT",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "NGAY_CT",
-      "Caption": "Tên Hàng Hóa ,Vật Tư ", 
-      "Width": 70,
-      "Format": "d"
-    },
-    {
-      "Name": "DIEN_GIAI",
-      "Caption": "Đơn Vị Tính",
+      "Name": "MA_SO1",
+      "Caption": "Mã Số",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "MA_TK",
-      "Caption": "Lượng Đầu Kỳ",
+      "Name": "CHI_TIEU",
+      "Caption": "Chi Tieu ",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "PS_NO",
-      "Caption": "Phát sinh nợ",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-      "Name": "PS_CO",
-      "Caption": "Phát sinh có",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
+        "Name": "TIEN2",
+        "Caption": "Tien",
+        "Width": 50,
+        "Format": ""
+      },
       
     
   ]
-
  
   
 

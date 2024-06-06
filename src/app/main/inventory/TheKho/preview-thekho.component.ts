@@ -11,11 +11,11 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-printBKCT',
-  templateUrl: './preview-sqtm.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-printSQTM',
+  templateUrl: './preview-thekho.component.html',
+  styleUrls: ['./thekho.component.css']
 })
-export class PreviewSQTMComponent implements OnInit {
+export class PreviewTheKhoComponent implements OnInit {
   public fromDate: string ='';
   public toDate: string = '';
   public chungtus: any[];
@@ -24,9 +24,10 @@ export class PreviewSQTMComponent implements OnInit {
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
-  public ma_tk: string = '111';
+  public ma_tk: string = 'Kho công ty';
   
   public nametable :string ;
+  public namewh :string ;
   
   public stringheadtable:string =`
   <tr>
@@ -86,6 +87,7 @@ export class PreviewSQTMComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
+      this.namewh = params['ten_kho']
       // .split('-').reverse().join('/')
      
     });
@@ -124,31 +126,31 @@ export class PreviewSQTMComponent implements OnInit {
     },
     {
       "Name": "NGAY_CT",
-      "Caption": "Tên Hàng Hóa ,Vật Tư ", 
+      
       "Width": 70,
       "Format": "d"
     },
     {
       "Name": "DIEN_GIAI",
-      "Caption": "Đơn Vị Tính",
+     
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "MA_TK",
-      "Caption": "Lượng Đầu Kỳ",
+      "Name": "SO_LUONG_NHAP",
+     
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "PS_NO",
-      "Caption": "Phát sinh nợ",
+      "Name": "SO_LUONG_XUAT",
+     
       "Width": 50,
       "Format": "#,##0.##;(#,##0.##);#"
     },
     {
-      "Name": "PS_CO",
-      "Caption": "Phát sinh có",
+      "Name": "SO_LUONG_TON",
+     
       "Width": 50,
       "Format": "#,##0.##;(#,##0.##);#"
     },

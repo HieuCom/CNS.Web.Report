@@ -7,11 +7,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NavigationExtras, Router } from '@angular/router';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 @Component({
-  selector: 'app-soquytienmat',
-  templateUrl: './soquytienmat.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-hdbr',
+  templateUrl: './hoadonmuavao.component.html',
+  styleUrls: ['./hoadonmuavao.component.css']
 })
-export class SoQuyTienMatComponent implements OnInit {
+export class HoaDonBanRaComponent implements OnInit {
 
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
@@ -31,8 +31,14 @@ export class SoQuyTienMatComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'Sổ Quỹ Tiền Mặt';
-  public ma_tk: string = '111';
+  public nametable= 'Bảng kê hóa đơn bán ra';
+
+  public ID_KHO: number = 0;
+
+  public ma_tk: number = 3331 ;
+ 
+
+
 
   bsModalRef: BsModalRef;
   
@@ -61,12 +67,13 @@ export class SoQuyTienMatComponent implements OnInit {
   
     try {
     
-      const response: any = await this.dataService.postCanDoiKeToan('/SoQuyTienMat', 
+      const response: any = await this.dataService.postCanDoiKeToan('/HoaDonBanRa', 
       { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate), MA_TK : this.ma_tk
 
       }).toPromise();
       this.nhapkhos = response;
-      console.log(this.nhapkhos.length);
+      this.nhapkhos.sort((a, b) => (a.TEN_NHOM_VAT > b.TEN_NHOM_VAT) ? 1 : ((b.TEN_NHOM_VAT > a.TEN_NHOM_VAT) ? -1 : 0))
+    
     } catch (error) {
       console.error('An error occurred:', error); 
     }
@@ -79,13 +86,16 @@ export class SoQuyTienMatComponent implements OnInit {
       queryParams: {
         'fromDate':this.fromDate.toISOString().slice(0, 10),
         'toDate':this.toDate.toISOString().slice(0, 10),
-        'nametable': this.nametable
+        'nametable': this.nametable,
+  
+        
       } ,
       state: {
-        chungtus: this.nhapkhos
+        chungtus: this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
       }
     };
-    this.router.navigate(['/main/inventory/prinSQTM'], navigationExtras);
+    this.router.navigate(['/main/inventory/printHDMV'], navigationExtras);
+   
     
   }
   getTotal(chungtus, groupName, field) {
@@ -127,55 +137,92 @@ export class SoQuyTienMatComponent implements OnInit {
   
   public columnInfonhapkho: any[] = [
     {
+      "Name": "TEN_NHOM_VAT",
+      "Caption": "Tên nhóm thuế ",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "MAU_SO",
+      "Caption": "MAU_SO",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "SO_SERI",
+      "Caption": "SO_SERI",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "SO_CT",
+      "Caption": "Số chứng từ",
+      "Width": 50,
+      "Format": ""
+    },
+    {
       "Name": "NGAY_CT",
       "Caption": "Ngày CT",
       "Width": 50,
       "Format": "d"
     },
     {
-        "Name": "SO_CT",
-        "Caption": "Số chứng từ",
+      "Name": "SO_HD",
+      "Caption": "Số hóa đơn",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+        "Name": "NGAY_HD",
+        "Caption": "NGAY_HD",
+        "Width": 50,
+        "Format": "d"
+      },
+      {
+        "Name": "TEN_KH_HD",
+        "Caption": "TEN_KH_HD",
         "Width": 50,
         "Format": ""
+      },
+
+      {
+        "Name": "MS_THUE",
+        "Caption": "Mã số thuế",
+        "Width": 90,
+        "Format": ""
+      },
+
+      {
+        "Name": "TEN_HANG",
+        "Caption": "Tên hàng",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "TIEN_TRTHUE",
+        "Caption": "Tiên Trc.Thuế",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      {
+        "Name": "",
+        "Caption": "Thuế suất",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "TIEN_VAT",
+        "Caption": "Tiền VAT",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
       },
       {
         "Name": "DIEN_GIAI",
-        "Caption": "Diễn giải", 
-        "Width": 70,
-        "Format": ""
-      },
-
-      {
-        "Name": "ONG_BA",
-        "Caption": "Ông bà",
+        "Caption": "Diễn giải",
         "Width": 50,
         "Format": ""
       },
-
-      {
-        "Name": "TK_DOI_UNG",
-        "Caption": "TK đối ứng",
-        "Width": 50,
-        "Format": ""
-      },
-      {
-        "Name": "PS_NO",
-        "Caption": "Thu tiền",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "PS_CO",
-        "Caption": "Chi tiền",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
-      {
-        "Name": "TON_QUY",
-        "Caption": "Tồn Quỹ",
-        "Width": 50,
-        "Format": "#,##0.##;(#,##0.##);#"
-      },
+      
       
     
   ]

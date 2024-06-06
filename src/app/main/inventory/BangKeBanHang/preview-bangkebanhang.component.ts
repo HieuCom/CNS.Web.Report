@@ -11,11 +11,11 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-printBKCT',
-  templateUrl: './preview-sqtm.component.html',
-  styleUrls: ['./soquytienmat.component.css']
+  selector: 'app-printBCLL',
+  templateUrl: './preview-bangkebanhang.component.html',
+  styleUrls: ['./bangkebanhang.component.css']
 })
-export class PreviewSQTMComponent implements OnInit {
+export class PreviewBKBHComponent implements OnInit {
   public fromDate: string ='';
   public toDate: string = '';
   public chungtus: any[];
@@ -24,9 +24,10 @@ export class PreviewSQTMComponent implements OnInit {
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
-  public ma_tk: string = '111';
+
   
   public nametable :string ;
+  public namewh :string ;
   
   public stringheadtable:string =`
   <tr>
@@ -86,7 +87,7 @@ export class PreviewSQTMComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
-      // .split('-').reverse().join('/')
+   
      
     });
 
@@ -99,7 +100,7 @@ export class PreviewSQTMComponent implements OnInit {
   
   getTotal(chungtus, groupName, field) {
     return chungtus
-      .filter(chungtu => chungtu.SO_CT === groupName)
+      .filter(chungtu => chungtu.MA_NL === groupName)
       .reduce((sum, chungtu) => sum + chungtu[field], 0);
 }
 
@@ -118,44 +119,46 @@ export class PreviewSQTMComponent implements OnInit {
 
   public columnInfonhapkho: any[] = [
     {
-      "Name": "SO_CT",
+      "Name": "MA_NL",
+      "Caption": "MÃ HH",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "NGAY_CT",
-      "Caption": "Tên Hàng Hóa ,Vật Tư ", 
-      "Width": 70,
-      "Format": "d"
-    },
-    {
-      "Name": "DIEN_GIAI",
-      "Caption": "Đơn Vị Tính",
+      "Name": "TEN_NL",
+      "Caption": "Tên Hàng",
       "Width": 50,
       "Format": ""
     },
     {
-      "Name": "MA_TK",
-      "Caption": "Lượng Đầu Kỳ",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "PS_NO",
-      "Caption": "Phát sinh nợ",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-      "Name": "PS_CO",
-      "Caption": "Phát sinh có",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
+        "Name": "TEN_DVT",
+        "Caption": "ĐVT",
+        "Width": 50,
+        "Format": ""
+      },
+      {
+        "Name": "SO_LUONG",
+        "Caption": "SL", 
+        "Width": 70,
+        "Format": ""
+      },
+
+      {
+        "Name": "TIEN_VON",
+        "Caption": "Tiền Vốn",
+        "Width": 90,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+
+      {
+        "Name": "TIEN_BAN",
+        "Caption": "Doanh Thu",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      }
       
     
   ]
-
  
   
 

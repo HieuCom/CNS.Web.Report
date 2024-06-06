@@ -33,12 +33,31 @@ import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.componen
 import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
 import { PreviewComponent } from './Preview/preview.component';
 import { SoChiTietTKComponent } from './TheoDoiHoatDong/sochitiettk.component';
-import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
-import { PreviewSQTMComponent } from './SoQuyTienMat/preview-sqtm.component';
+
 import { SoQuyTienGuiNHComponent } from './SoTienGuiNH/soquytienguinh.component';
 import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
 import { SoQuyTongHopComponent } from './SoTienGuiNH/tonghop.component';
 import { TongHopBaoCaoComponent } from './TongHopBaoCao/tonghopbaocao.component';
+import { TheKhoComponent } from './TheKho/thekho.component';
+import { PreviewTheKhoComponent } from './TheKho/preview-thekho.component';
+import { HoaDonMuaVaoComponent } from './HoaDonMuaVao/hoadonmuavao.component';
+import { PreviewHDMVComponent } from './HoaDonMuaVao/preview-hoadonmuavao.component';
+import { HoaDonBanRaComponent } from './HoaDonMuaVao/hoadonbanra.component';
+import { SoChiTietKhoComponent } from './SoChiTietKho/sochitietkho.component';
+import { PreviewSCTKComponent } from './SoChiTietKho/preview-sochitietkho.component';
+import { SoChiTietCongNoComponent } from './SoChiTietCongNo/sochitietcongno.component';
+import { PreviewSCCNComponent } from './SoChiTietCongNo/preview-sochitietcongno.component';
+import { SoQuyTienMatComponent } from './SoQuyTienMat/soquytienmat.component';
+import { PreviewSQTMComponent } from './SoQuyTienMat/preview-sqtm.component';
+import { BangKeChungTuComponent } from './BanKeChungTu/bangkechungtu.component';
+import { PreviewBKCTComponent } from './BanKeChungTu/preview-bkct.component';
+import { BaoCaoLaiLoComponent } from './BaoCaoLaiLo/baocaolailo.component';
+import { PreviewBCLLComponent } from './BaoCaoLaiLo/preview-baocaolailo.component';
+import { BangKeBanHangComponent } from './BangKeBanHang/bangkebanhang.component';
+import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.component';
+import { PreviewToKhaiThueComponent } from './ToKhaiThue/preview-tokhaithue.component';
+import { ToKhaiThueComponent } from './ToKhaiThue/tokhaithue.component';
+
 
 @NgModule({
   imports: [
@@ -71,14 +90,35 @@ import { TongHopBaoCaoComponent } from './TongHopBaoCao/tonghopbaocao.component'
     SoChiTietTKComponent,
     SoQuyTienMatComponent,
     SoQuyTienGuiNHComponent,
+    TongHopBaoCaoComponent,
     SoQuyTongHopComponent,
+    TheKhoComponent,
+    HoaDonMuaVaoComponent,
+    HoaDonBanRaComponent,
+    SoChiTietKhoComponent,
+    SoChiTietCongNoComponent,
+    BangKeChungTuComponent,
+    BaoCaoLaiLoComponent,
+    BangKeBanHangComponent,
+    ToKhaiThueComponent,
+
+
     PreviewSQTMComponent,
     PrintTKComponent,
     PrintCanDoiKeToanComponent,
     PrintNhatKyChungComponent,
     PreviewComponent,
     PreviewSQTNHComponent,
-    TongHopBaoCaoComponent
+    PreviewTheKhoComponent,
+    PreviewHDMVComponent,
+    PreviewSCTKComponent,
+    PreviewSCCNComponent,
+    PreviewBKCTComponent,
+    PreviewBCLLComponent,
+    PreviewBKBHComponent,
+    PreviewToKhaiThueComponent
+    
+   
 
     
     // SimpleTinyComponent
