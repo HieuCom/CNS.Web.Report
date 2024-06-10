@@ -30,10 +30,8 @@ import { LuuChuyenTienTeListComponent2 } from './TheoDoiHoatDong/lctt';
 import { NhapXuatTonKhoComponent } from './TheoDoiHoatDong/nhapxuattonkho.component';
 import { PrintTKComponent } from './PrintTonKho/printtk.component';
 import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
-import { PrintNhatKyChungComponent } from './PrintNhatKyChung/printnhatkychung.component';
 import { PreviewComponent } from './Preview/preview.component';
 import { SoChiTietTKComponent } from './TheoDoiHoatDong/sochitiettk.component';
-
 import { SoQuyTienGuiNHComponent } from './SoTienGuiNH/soquytienguinh.component';
 import { PreviewSQTNHComponent } from './SoTienGuiNH/preview-sqnh.component';
 import { SoQuyTongHopComponent } from './SoTienGuiNH/tonghop.component';
@@ -106,7 +104,6 @@ import { ToKhaiThueComponent } from './ToKhaiThue/tokhaithue.component';
     PreviewSQTMComponent,
     PrintTKComponent,
     PrintCanDoiKeToanComponent,
-    PrintNhatKyChungComponent,
     PreviewComponent,
     PreviewSQTNHComponent,
     PreviewTheKhoComponent,

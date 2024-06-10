@@ -164,8 +164,14 @@ export class BaoCaoLaiLoComponent implements OnInit {
         "Width": 50,
         "Format": "#,##0.##;(#,##0.##);#"
       }
-      
-    
+      ,
+      {
+        "Name1": "TIEN_BAN",
+        "Name2": "TIEN_VON",
+        "Caption": "Lãi Lỗ",
+        "Width": 50,
+        "Format": "calc"
+      }
   ]
  
   

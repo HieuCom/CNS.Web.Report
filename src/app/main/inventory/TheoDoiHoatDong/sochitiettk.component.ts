@@ -32,7 +32,7 @@ export class SoChiTietTKComponent implements OnInit {
   public totalRow: number;
   public filter: string = '';
   public nhapkhos: any[];
-  public nametable= 'Sổ Nhật Ký Chung';
+  public nametable= 'Sổ Chi Tiết Tài khoản';
 
   bsModalRef: BsModalRef;
   
@@ -155,7 +155,7 @@ export class SoChiTietTKComponent implements OnInit {
       {
         "Name": "PS_CO",
         "Caption": "Phát sinh có",
-        "Width": 50,
+        "Width": 100,
         "Format": "#,##0.##;(#,##0.##);#"
       }
     

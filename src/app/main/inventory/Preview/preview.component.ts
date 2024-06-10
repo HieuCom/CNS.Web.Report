@@ -24,38 +24,12 @@ export class PreviewComponent implements OnInit {
   public pageDisplay: number = 10;
   public totalRow: number;
   public userLoginId: number;
-  
   public nametable :string ;
-  
-  public stringheadtable:string =`
-  <tr>
-            <th colspan="2" style="text-align: center;" class="large-column">
-              CHỨNG TỪ
-            </th>
-       
-            <th rowspan="2" class="small-column">
-              DIỄN GIẢI
-            </th>
-            <th rowspan="2" class="small-column">
-              TK DƯ
-            </th>
-            <th colspan="2" style="text-align: center;" class="large-column">
-              PHÁT SINH
-            </th>
-          </tr>
-      
-          <tr>
-            <th>SỐ CT</th>
-            <th>NGÀY CT</th>
-            <th>NỢ</th>
-            <th>CÓ</th>
-           
-        </tr>
-  
-  `;
-  public headHtml: SafeHtml;
-  public rowHtml: SafeHtml;
 
+  public columnInfo: any[];
+
+
+  
 
    
 
@@ -64,7 +38,7 @@ export class PreviewComponent implements OnInit {
     private route: ActivatedRoute,
     private columnInfoService: ColuminfoService,
     private _authenService: AuthenService) {
-      this.headHtml = this.sanitizer.bypassSecurityTrustHtml(this.stringheadtable);
+     
 
      
   }
@@ -72,6 +46,8 @@ export class PreviewComponent implements OnInit {
   ngOnInit() {
     var user = this._authenService.getLoggedInUser();
     this.getUserIdLogin(user.username);
+    //get param from component
+    this.columnInfoService.currentColumnInfo.subscribe(columnInfo => this.columnInfo = columnInfo);
 
 
   
@@ -81,7 +57,6 @@ export class PreviewComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
-      // .split('-').reverse().join('/')
      
     });
 
@@ -111,45 +86,6 @@ export class PreviewComponent implements OnInit {
     }
   }
 
-  public columnInfonhapkho: any[] = [
-    {
-      "Name": "SO_CT",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "NGAY_CT",
-      "Caption": "Tên Hàng Hóa ,Vật Tư ", 
-      "Width": 70,
-      "Format": "d"
-    },
-    {
-      "Name": "DIEN_GIAI",
-      "Caption": "Đơn Vị Tính",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "MA_TK",
-      "Caption": "Lượng Đầu Kỳ",
-      "Width": 50,
-      "Format": ""
-    },
-    {
-      "Name": "PS_NO",
-      "Caption": "Phát sinh nợ",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-    {
-      "Name": "PS_CO",
-      "Caption": "Phát sinh có",
-      "Width": 50,
-      "Format": "#,##0.##;(#,##0.##);#"
-    },
-      
-    
-  ]
 
  
   

@@ -49,7 +49,7 @@ export class SoNhatKyChungComponent implements OnInit {
   }
 
   updateColumnInfo() {
-    this.columnInfoService.changeColumnInfo(this.columnInfonhapkho);
+    this.columnInfoService.changeColumnInfo(this.columnInfo);
   }
   private getNowUTC(now : Date ) {
    
@@ -82,7 +82,7 @@ export class SoNhatKyChungComponent implements OnInit {
         chungtus: this.nhapkhos
       }
     };
-    this.router.navigate(['/main/inventory/print'], navigationExtras);
+    this.router.navigate(['/main/inventory/printCDKT'], navigationExtras);
     
   }
 
@@ -125,21 +125,22 @@ export class SoNhatKyChungComponent implements OnInit {
       "Format": "d"
     },
     {
+      "Name": "SO_CT",
+      "Caption": "Số chứng từ",
+      "Width": 50,
+      "Format": ""
+    },
+    {
       "Name": "MA_TK",
       "Caption": "Mã tài khoản",
       "Width": 50,
       "Format": ""
     },
-    {
-        "Name": "SO_CT",
-        "Caption": "Số chứng từ",
-        "Width": 50,
-        "Format": ""
-      },
+   
       {
         "Name": "TEN_TK",
         "Caption": "Tên tài khoản",
-        "Width": 80,
+        "Width": 400,
         "Format": ""
       },
       {
@@ -169,7 +170,7 @@ export class SoNhatKyChungComponent implements OnInit {
       {
         "Name": "ONG_BA",
         "Caption": "Ông bà",
-        "Width": 50,
+        "Width": 300,
         "Format": ""
       },
       {
@@ -181,28 +182,69 @@ export class SoNhatKyChungComponent implements OnInit {
       {
         "Name": "TEN_DT",
         "Caption": "Tên đối tượng",
-        "Width": 50,
+        "Width": 300,
         "Format": ""
       },
     {
       "Name": "DIEN_GIAI",
       "Caption": "Diễn giải", 
-      "Width": 70,
+      "Width": 400,
       "Format": ""
     },
     {
       "Name": "mDIEN_GIAI",
       "Caption": "Diễn giải tổng", 
-      "Width": 70,
+      "Width": 400,
       "Format": ""
     },
     {
       "Name": "mDIEN_GIAI",
       "Caption": "Diễn giải tổng", 
-      "Width": 70,
+      "Width": 400,
       "Format": ""
     },
     
   ]
-  
-}
+
+  //column preview
+  public columnInfo: any[] = [
+    {
+      "Name": "SO_CT",
+      "Caption": "Số chứng từ ", 
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "NGAY_CT",
+      "Caption": "Tên Hàng Hóa ,Vật Tư ", 
+      "Width": 70,
+      "Format": "d"
+    },
+    {
+      "Name": "DIEN_GIAI",
+      "Caption": "Đơn Vị Tính",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "MA_TK",
+      "Caption": "Lượng Đầu Kỳ",
+      "Width": 50,
+      "Format": ""
+    },
+    {
+      "Name": "PS_NO",
+      "Caption": "Tiền Đầu Kỳ",
+      "Width": 50,
+      "Format": "#,##0.##;(#,##0.##);"
+    },
+    {
+        "Name": "PS_CO",
+        "Caption": "Lượng nhập",
+        "Width": 50,
+        "Format": "#,##0.##;(#,##0.##);#"
+      },
+      
+    
+  ]
+} 

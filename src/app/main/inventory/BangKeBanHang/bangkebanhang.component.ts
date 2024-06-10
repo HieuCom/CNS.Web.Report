@@ -75,6 +75,7 @@ export class BangKeBanHangComponent implements OnInit {
         ID_LOAI_CT:"5"
       }).toPromise();
       this.nhapkhos = response;
+      console.log(this.nhapkhos[1].TIEN_BAN);
   
     } catch (error) {
       console.error('An error occurred:', error); 
@@ -92,7 +93,7 @@ export class BangKeBanHangComponent implements OnInit {
       
       } ,
       state: {
-        chungtus: this.nhapkhos.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0))
+        chungtus: this.nhapkhos
       }
     };
     this.router.navigate(['/main/inventory/printBCLL'], navigationExtras);
@@ -123,11 +124,6 @@ export class BangKeBanHangComponent implements OnInit {
   reloaddata() {
     this.loadData();
   }
-  
-
-
-
-
   
   public columnInfonhapkho: any[] = [
     {
@@ -187,7 +183,7 @@ export class BangKeBanHangComponent implements OnInit {
         "Format": "#,##0.##;(#,##0.##);#"
       },
       {
-        "Name": "TIEN_BAN",
+        "Name": "TIEN2",
         "Caption": "Tiền Bán",
         "Width": 50,
         "Format": "#,##0.##;(#,##0.##);#"
@@ -204,6 +200,13 @@ export class BangKeBanHangComponent implements OnInit {
         "Width": 50,
         "Format": "#,##0.##;(#,##0.##);#"
       },
+      {
+        "Name1": "TIEN2",
+        "Name2": "TIEN_VON",
+        "Caption": "Lãi Lỗ",
+        "Width": 50,
+        "Format": "calc"
+      }
       
       
       

@@ -33,7 +33,7 @@
       
       <table class="table table-bordered">
       
-        <thead [innerHTML]="headHtml" >
+        <thead>
 
         </thead>
 
@@ -54,7 +54,7 @@
       
         <!-- Hiển thị thông tin của từng mục -->
         <tr class="select-item">
-          <td *ngFor="let colInfo of columnInfonhapkho">
+          <td *ngFor="let colInfo of columnInfo">
             <strong *ngIf="chungtu.BOLD == true && colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:'dd/MM/yyyy'}}</strong>
             <span *ngIf="chungtu.BOLD != true && colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:'dd/MM/yyyy'}}</span>
             

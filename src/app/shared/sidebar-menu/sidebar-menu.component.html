@@ -18,7 +18,15 @@
 
     <div class="menu_dropdown" *ngIf="userLevel < 3" >
        
-         <div class="item"> <a (click)="toggleSubmenu('showSubmenu')" routerLink="inventory/tonghopbaocao" routerLinkActive="active">BÁO CÁO</a>
+         <div class="item"> 
+         
+          <a (click)="toggleSubmenu('showSubmenu')" routerLink="inventory/tonghopbaocao" routerLinkActive="active">
+            <!-- <i  class="fa fa-chevron-down " aria-hidden="true"></i> -->
+            <!-- <i class="fa fa-chevron-right" aria-hidden="true"></i> -->
+            <i [class]="submenus.showSubmenu ? 'fa fa-chevron-down' : 'fa fa-chevron-right'" aria-hidden="true"></i>
+            BÁO CÁO
+        
+        </a>
 
           <div class="sub__menu" [style.display]="submenus.showSubmenu ? 'block' : 'none'">
 
@@ -44,6 +52,7 @@
                   </div>
 
              <div class="sub__menu-item" *ngIf="userLevel < 3" >   
+             
               <a (click)="toggleSubmenu('showSubmenujournal')" routerLinkActive="active">Báo cáo nhật ký chung</a> 
               <div [style.display]="submenus.showSubmenujournal ? 'block' : 'none'" class="sub__menu-lv2">            
                       <ul >

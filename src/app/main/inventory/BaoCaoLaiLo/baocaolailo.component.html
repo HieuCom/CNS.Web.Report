@@ -73,10 +73,6 @@
             {{colInfo.Caption}}
           </div>
         </th>
-        <th> <div [style.width.px]="50">
-          Lãi Lỗ
-        </div>
-      </th>
       </tr>
     </thead>
     <tbody>
@@ -85,9 +81,8 @@
           <span *ngIf=" colInfo.Format == 'd' ">{{chungtu[colInfo.Name] | date:'dd/MM/yyyy'}}</span>          
           <span *ngIf="colInfo.Format == '#,##0.##;(#,##0.##);#' ">{{chungtu[colInfo.Name]|number }}</span>
           <span *ngIf="colInfo.Format == '' ">{{chungtu[colInfo.Name] }}</span>
-        </td>
-
-        <td> {{chungtu.TIEN_BAN - chungtu.TIEN_VON}} </td>
+          <span *ngIf="colInfo.Format == 'calc' ">{{chungtu[colInfo.Name1]-chungtu[colInfo.Name2]|number }}</span>
+        </td>  
       </tr>
     </tbody>
 
