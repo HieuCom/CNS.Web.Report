@@ -34,6 +34,13 @@ export class SoQuyTienGuiNHComponent implements OnInit {
   public nametable= 'Sổ Quỹ Tiền Gửi Ngân Hàng';
   public ma_tk: string = '112';
 
+  public psco: number = 0;
+  public psno: number = 0;
+
+  
+  public nodauky: number = 0;
+  public nocuoiky: number = 0;
+
   bsModalRef: BsModalRef;
   
   constructor(private dataService: DataService,
@@ -47,6 +54,8 @@ export class SoQuyTienGuiNHComponent implements OnInit {
     this.toDate.setDate;
     this.updateColumnInfo();
     this.loadData();
+    this.loadnodauky();
+    this.loadnocuoiky();
   }
 
   updateColumnInfo() {
@@ -66,7 +75,8 @@ export class SoQuyTienGuiNHComponent implements OnInit {
 
       }).toPromise();
       this.nhapkhos = response;
-     console.log(this.nhapkhos[1]);
+      this.psco = this.nhapkhos.reduce((sum, nhapkho) => sum + nhapkho.PS_CO, 0);
+      this.psno = this.nhapkhos.reduce((sum, nhapkho) => sum + nhapkho.PS_NO, 0);
     
     } catch (error) {
       console.error('An error occurred:', error); 
@@ -109,6 +119,45 @@ export class SoQuyTienGuiNHComponent implements OnInit {
       this.toDate = rangeDate2;
       this.loadData();
     }
+  }
+
+  async loadnodauky() {
+  
+    try {
+    
+      const response: any = await this.dataService.postCanDoiKeToan('/DauKyTaiKhoan', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), 
+        DEN_NGAY : this.getNowUTC(this.toDate), 
+        ID_DV:1  ,
+        ID_DT:0    ,
+        MA_TK : this.ma_tk
+
+      }).toPromise();
+      this.nodauky = response.DKN;
+      console.log(this.nodauky);
+    } catch (error) {
+      console.error('An error occurred:', error); 
+    }
+ 
+  }
+
+  async loadnocuoiky() {
+  
+    try {
+    
+      const response: any = await this.dataService.postCanDoiKeToan('/CuoiKyTaiKhoan', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), 
+        DEN_NGAY : this.getNowUTC(this.toDate), 
+        ID_DV:1  ,
+        ID_DT:0    ,
+        MA_TK : this.ma_tk
+
+      }).toPromise();
+      this.nocuoiky = response.CKN;
+    } catch (error) {
+      console.error('An error occurred:', error); 
+    }
+ 
   }
   
   reloaddata() {

@@ -26,7 +26,7 @@ import { HoaDongListComponent } from './TheoDoiHoatDong/hoatdong-list.component'
 import { PrintCanDoiKeToanComponent } from './PrintCDKT/CanDoiKeToan/TheoDoiChungTu/print-candoiketoan.component';
 import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 import { CanDoiKeToanComponent2 } from './TheoDoiHoatDong/cdkt.component';
-import { LuuChuyenTienTeListComponent2 } from './TheoDoiHoatDong/lctt';
+import { LuuChuyenTienTeListComponent2 } from './TheoDoiHoatDong/lctt.component';
 import { NhapXuatTonKhoComponent } from './TheoDoiHoatDong/nhapxuattonkho.component';
 import { PrintTKComponent } from './PrintTonKho/printtk.component';
 import { SoNhatKyChungComponent } from './TheoDoiHoatDong/sonhatkychung.component';
@@ -55,6 +55,7 @@ import { BangKeBanHangComponent } from './BangKeBanHang/bangkebanhang.component'
 import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.component';
 import { PreviewToKhaiThueComponent } from './ToKhaiThue/preview-tokhaithue.component';
 import { ToKhaiThueComponent } from './ToKhaiThue/tokhaithue.component';
+import { PreViewNoGr } from './PreviewNoGr/previewnogr.component';
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { ToKhaiThueComponent } from './ToKhaiThue/tokhaithue.component';
     PreviewBKCTComponent,
     PreviewBCLLComponent,
     PreviewBKBHComponent,
-    PreviewToKhaiThueComponent
+    PreviewToKhaiThueComponent,
+    PreViewNoGr
     
    
 

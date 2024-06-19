@@ -68,6 +68,12 @@
     </button>
 </div> -->
 <div class="nametable" >{{this.nametable}}</div>
+<!-- <div class="account">
+  <div>Dư nợ đầu ngày:{{this.nodauky | number}}</div>
+  <div>Phát sinh nợ: {{this.psno|number}}</div>
+  <div>Phát sinh có: {{this.psco|number}}</div>
+  <div>Dư nợ cuối ngày:{{this.nocuoiky | number}}</div>
+ </div> -->
 <div class="table-responsive">
   <table class="table table-bordered">
     <thead>
@@ -92,6 +98,7 @@
           <td><strong>{{ chungtu.TK_DOI_UNG }} </strong> </td>
             <td>{{ getTotal(nhapkhos, chungtu.SO_CT,'PS_NO') |number }}</td>
             <td>{{ getTotal(nhapkhos, chungtu.SO_CT,'PS_CO')|number }}</td>
+            <td><strong>{{ chungtu.TON_QUY }} </strong> </td>
         </tr>
       
         <!-- Hiển thị thông tin của từng mục -->

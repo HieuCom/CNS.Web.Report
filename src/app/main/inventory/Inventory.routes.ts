@@ -4,7 +4,7 @@ import { NhapKhoListComponent } from './NhapKhoList/nhapkho-list.component';
 import { TheoDoiChungTuComponent } from './TheoDoiChungTu/theodoichungtu.component';
 import { HoaDongListComponent } from './TheoDoiHoatDong/hoatdong-list.component';
 import { PrintCanDoiKeToanComponent } from './PrintCDKT/CanDoiKeToan/TheoDoiChungTu/print-candoiketoan.component';
-import { LuuChuyenTienTeListComponent2 } from './TheoDoiHoatDong/lctt';
+import { LuuChuyenTienTeListComponent2 } from './TheoDoiHoatDong/lctt.component';
 import { CanDoiKeToanComponent2 } from './TheoDoiHoatDong/cdkt.component';
 import { NhapXuatTonKhoComponent } from './TheoDoiHoatDong/nhapxuattonkho.component';
 import { PrintTKComponent } from './PrintTonKho/printtk.component';
@@ -35,6 +35,7 @@ import { BangKeBanHangComponent } from './BangKeBanHang/bangkebanhang.component'
 import { PreviewBKBHComponent } from './BangKeBanHang/preview-bangkebanhang.component';
 import { PreviewToKhaiThueComponent } from './ToKhaiThue/preview-tokhaithue.component';
 import { ToKhaiThueComponent } from './ToKhaiThue/tokhaithue.component';
+import { PreViewNoGr } from './PreviewNoGr/previewnogr.component';
 
 const routes: Routes = [
     { path: 'banhang', component: BanHangListComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
     {path: 'bangkebanhang', component: BangKeBanHangComponent},
     {path: 'tokhaithue', component: ToKhaiThueComponent},
 
+
     
     {path: 'printCDKT', component: PrintCanDoiKeToanComponent},
     {path: 'printTK', component: PrintTKComponent},
@@ -74,6 +76,7 @@ const routes: Routes = [
     {path: 'printBCLL', component: PreviewBCLLComponent},
     {path: 'printBKBH', component: PreviewBKBHComponent},
     {path: 'printTKT', component: PreviewToKhaiThueComponent},
+    {path: 'previewnogr', component: PreViewNoGr},
     
     
 

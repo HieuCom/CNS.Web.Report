@@ -7,6 +7,10 @@
     cursor: pointer;
     padding:5px 10px;
 }
+.item i{
+   
+
+}
 
 .item a:hover{
     background-color: rgb(176, 173, 173);

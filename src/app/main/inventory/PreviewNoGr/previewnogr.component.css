@@ -30,13 +30,11 @@
 .select-item:hover{
     background-color: #e6e6e6;
 }
-.matk,
 .time,
 .nametb{
     text-align: center;
     margin-bottom: 20px;
 }
-
 
 .title {
     display: flex;
@@ -52,40 +50,4 @@
     display: flex;
     justify-content: space-between;
 }
-.caption-flex {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-  }
-
-.large-column {
-    max-width: 90px; /* Điều chỉnh độ rộng của các cột lớn */
-}
-
-.small-column {
-    max-width: 50px; /* Điều chỉnh độ rộng của các cột lớn */
-}
-
-.account{
-    float: right;;
-    
-    margin-right: 20px;
-
-}
-
-/* .caption{
-    
-    display: flex;
-    justify-content: flex-end;
-    background-color: green;
-}
-.total{
-    margin-right: 230px;
-    background-color: #e6e6e6;
-    
-} */
-
-
-
-
 

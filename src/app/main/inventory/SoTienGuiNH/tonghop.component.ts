@@ -34,6 +34,13 @@ export class SoQuyTongHopComponent implements OnInit {
   public nametable= 'Sổ Quỹ Tổng Hợp';
   public ma_tk: string = '111';
 
+  public psco: number = 0;
+  public psno: number = 0;
+
+  
+  public nodauky: number = 0;
+  public nocuoiky: number = 0;
+
   bsModalRef: BsModalRef;
   
   constructor(private dataService: DataService,
