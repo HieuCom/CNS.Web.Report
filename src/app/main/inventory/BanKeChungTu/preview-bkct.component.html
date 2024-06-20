@@ -24,7 +24,7 @@
       <h2 class="nametb" >{{this.nametable}}</h2>
       <h4 class="nametb" >Tài khoản:{{this.ma_tk}}</h4>
       <p class="time" >Từ ngày:{{ this.fromDate.split('-').reverse().join('/') }} đến ngày: {{ this.toDate.split('-').reverse().join('/') }} </p>
-      <div class="account">
+      <div *ngIf="showDiv" class="account" >
         <div>Dư nợ đầu ngày:{{this.nodauky | number}}</div>
         <div>Phát sinh nợ: {{this.psno|number}}</div>
         <div>Phát sinh có: {{this.psco|number}}</div>

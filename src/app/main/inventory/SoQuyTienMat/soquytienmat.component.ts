@@ -41,6 +41,8 @@ export class SoQuyTienMatComponent implements OnInit {
   public nodauky: number = 0;
   public nocuoiky: number = 0;
 
+  public showDiv: boolean =true ;
+
   bsModalRef: BsModalRef;
   
   constructor(private dataService: DataService,
@@ -145,7 +147,8 @@ export class SoQuyTienMatComponent implements OnInit {
         'nodauky': this.nodauky,
         'nocuoiky': this.nocuoiky,
         "psco": this.psco,
-        "psno": this.psno
+        "psno": this.psno,
+        'showDiv': this.showDiv
       } ,
       state: {
         chungtus: this.nhapkhos

@@ -35,8 +35,11 @@ export class PreviewBKCTComponent implements OnInit {
   
   
   public nametable :string ;
+  showDiv: boolean ;
   
   public stringheadtable:string =`
+
+  
   <tr>
            <th rowspan="2" class="small-column">
               Ngày
@@ -98,7 +101,8 @@ export class PreviewBKCTComponent implements OnInit {
       this.nocuoiky = params['nocuoiky']
       this.psco = params['psco']
       this.psno = params['psno']
-      // .split('-').reverse().join('/')
+      this.showDiv = params['showDiv']
+      console.log(this.showDiv);
      
     });
 
