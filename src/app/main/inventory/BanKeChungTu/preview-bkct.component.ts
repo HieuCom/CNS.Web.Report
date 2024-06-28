@@ -25,10 +25,21 @@ export class PreviewBKCTComponent implements OnInit {
   public totalRow: number;
   public userLoginId: number;
   public ma_tk: string = '111';
+
+  public psco: number = 0;
+  public psno: number = 0;
+
+  
+  public nodauky: number = 0;
+  public nocuoiky: number = 0;
+  
   
   public nametable :string ;
+  showDiv: boolean ;
   
   public stringheadtable:string =`
+
+  
   <tr>
            <th rowspan="2" class="small-column">
               Ngày
@@ -86,7 +97,12 @@ export class PreviewBKCTComponent implements OnInit {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
-      // .split('-').reverse().join('/')
+      this.nodauky = params['nodauky']
+      this.nocuoiky = params['nocuoiky']
+      this.psco = params['psco']
+      this.psno = params['psno']
+      this.showDiv = params['showDiv']
+      console.log(this.showDiv);
      
     });
 

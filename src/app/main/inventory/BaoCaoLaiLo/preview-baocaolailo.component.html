@@ -60,7 +60,7 @@
                 <span *ngIf="colInfo.Format == '' ">{{chungtu[colInfo.Name] }}</span>
               </td>
 
-              <td> {{chungtu.TIEN_BAN - chungtu.TIEN_VON}} </td>
+              <td> {{chungtu.TIEN_BAN - chungtu.TIEN_VON|number}} </td>
             </tr>
       
         </tbody>

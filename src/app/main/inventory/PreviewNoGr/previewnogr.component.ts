@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, TemplateRef, ViewChild, ɵɵinjectPipeChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MessageContstants } from 'src/app/core/common/message.constants';
@@ -11,11 +10,11 @@ import { DataService } from 'src/app/core/services/data.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
-  selector: 'app-printNKC',
-  templateUrl: './preview.component.html',
-  styleUrls: ['./preview.component.css']
+  selector: 'app-previewnogr',
+  templateUrl: './previewnogr.component.html',
+  styleUrls: ['./previewnogr.component.css']
 })
-export class PreviewComponent implements OnInit {
+export class PreViewNoGr implements OnInit {
   public fromDate: string ='';
   public toDate: string = '';
   public chungtus: any[];
@@ -25,53 +24,37 @@ export class PreviewComponent implements OnInit {
   public totalRow: number;
   public userLoginId: number;
   public nametable :string ;
-
-  public columnInfo: any[];
-
-
-  
-
-   
+  public columnInfochungtu: any[];
+  public maTk: string ;
 
   constructor(private _dataService: DataService,
-    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private columnInfoService: ColuminfoService,
     private _authenService: AuthenService) {
-     
-
-     
   }
 
   ngOnInit() {
     var user = this._authenService.getLoggedInUser();
     this.getUserIdLogin(user.username);
-    //get param from component
-    this.columnInfoService.currentColumnInfo.subscribe(columnInfo => this.columnInfo = columnInfo);
-
 
   
     //get param from component
-
+    this.columnInfoService.currentColumnInfo.subscribe(columnInfo => this.columnInfochungtu = columnInfo);
     this.route.queryParams.subscribe(params => {
       this.fromDate =params['fromDate']
       this.toDate = params['toDate']
       this.nametable = params['nametable']
+      this.maTk = params['ma_tk']
+      // .split('-').reverse().join('/')
      
     });
 
     this.chungtus = history.state.chungtus;
-    this.chungtus.sort((a, b) => (a.SO_CT > b.SO_CT) ? 1 : ((b.SO_CT > a.SO_CT) ? -1 : 0));
     //this.loadData();
+   
 
+   
   }
-
-  
-  getTotal(chungtus, groupName, field) {
-    return chungtus
-      .filter(chungtu => chungtu.SO_CT === groupName)
-      .reduce((sum, chungtu) => sum + chungtu[field], 0);
-}
 
   async getUserIdLogin(userName) {
     if (userName) {
@@ -85,9 +68,5 @@ export class PreviewComponent implements OnInit {
       });
     }
   }
-
-
- 
-  
 
 }

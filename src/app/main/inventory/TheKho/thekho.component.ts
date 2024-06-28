@@ -159,7 +159,7 @@ export class TheKhoComponent implements OnInit {
       {
         "Name": "DIEN_GIAI",
         "Caption": "Diễn giải", 
-        "Width": 70,
+        "Width": 500,
         "Format": ""
       },
 

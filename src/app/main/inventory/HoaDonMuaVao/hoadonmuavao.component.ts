@@ -139,7 +139,7 @@ export class HoaDonMuaVaoComponent implements OnInit {
     {
       "Name": "TEN_NHOM_VAT",
       "Caption": "Tên nhóm thuế ",
-      "Width": 50,
+      "Width": 400,
       "Format": ""
     },
     {
@@ -157,19 +157,19 @@ export class HoaDonMuaVaoComponent implements OnInit {
     {
       "Name": "SO_CT",
       "Caption": "Số chứng từ",
-      "Width": 50,
+      "Width": 100,
       "Format": ""
     },
     {
       "Name": "NGAY_CT",
       "Caption": "Ngày CT",
-      "Width": 50,
+      "Width": 90,
       "Format": "d"
     },
     {
       "Name": "SO_HD",
       "Caption": "Số hóa đơn",
-      "Width": 50,
+      "Width": 90,
       "Format": ""
     },
     {
@@ -181,7 +181,7 @@ export class HoaDonMuaVaoComponent implements OnInit {
       {
         "Name": "TEN_KH_HD",
         "Caption": "TEN_KH_HD",
-        "Width": 50,
+        "Width": 150,
         "Format": ""
       },
 
@@ -195,7 +195,7 @@ export class HoaDonMuaVaoComponent implements OnInit {
       {
         "Name": "TEN_HANG",
         "Caption": "Tên hàng",
-        "Width": 50,
+        "Width": 200,
         "Format": ""
       },
       {
@@ -219,7 +219,7 @@ export class HoaDonMuaVaoComponent implements OnInit {
       {
         "Name": "DIEN_GIAI",
         "Caption": "Diễn giải",
-        "Width": 50,
+        "Width": 150,
         "Format": ""
       },
       

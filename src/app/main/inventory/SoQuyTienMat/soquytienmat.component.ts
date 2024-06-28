@@ -34,6 +34,15 @@ export class SoQuyTienMatComponent implements OnInit {
   public nametable= 'Sổ Quỹ Tiền Mặt';
   public ma_tk: string = '111';
 
+  public psco: number = 0;
+  public psno: number = 0;
+
+  
+  public nodauky: number = 0;
+  public nocuoiky: number = 0;
+
+  public showDiv: boolean =true ;
+
   bsModalRef: BsModalRef;
   
   constructor(private dataService: DataService,
@@ -47,6 +56,13 @@ export class SoQuyTienMatComponent implements OnInit {
     this.toDate.setDate;
     this.updateColumnInfo();
     this.loadData();
+    this.loadnodauky();
+    this.loadnocuoiky();
+   // this.calculateTotalPsco();
+   if (this.nhapkhos) {
+    this.psco = this.nhapkhos.reduce((sum, nhapkho) => sum + nhapkho.PS_CO, 0);
+    console.log(this.psco);
+  }
   }
 
   updateColumnInfo() {
@@ -62,15 +78,63 @@ export class SoQuyTienMatComponent implements OnInit {
     try {
     
       const response: any = await this.dataService.postCanDoiKeToan('/SoQuyTienMat', 
-      { TU_NGAY:this.getNowUTC(this.fromDate), DEN_NGAY : this.getNowUTC(this.toDate), MA_TK : this.ma_tk
+      { TU_NGAY:this.getNowUTC(this.fromDate), 
+        DEN_NGAY : this.getNowUTC(this.toDate), 
+        ID_DV:1  ,
+        ID_DT:0    ,
+        MA_TK : this.ma_tk
 
       }).toPromise();
       this.nhapkhos = response;
       console.log(this.nhapkhos.length);
+      if (this.nhapkhos) {
+        this.psco = this.nhapkhos.reduce((sum, nhapkho) => sum + nhapkho.PS_CO, 0);
+        this.psno = this.nhapkhos.reduce((sum, nhapkho) => sum + nhapkho.PS_NO, 0);
+        console.log(this.psco);
+      }
     } catch (error) {
       console.error('An error occurred:', error); 
     }
     
+ 
+  }
+
+  async loadnodauky() {
+  
+    try {
+    
+      const response: any = await this.dataService.postCanDoiKeToan('/DauKyTaiKhoan', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), 
+        DEN_NGAY : this.getNowUTC(this.toDate), 
+        ID_DV:1  ,
+        ID_DT:0    ,
+        MA_TK : this.ma_tk
+
+      }).toPromise();
+      this.nodauky = response.DKN;
+      console.log(this.nodauky);
+    } catch (error) {
+      console.error('An error occurred:', error); 
+    }
+ 
+  }
+
+  async loadnocuoiky() {
+  
+    try {
+    
+      const response: any = await this.dataService.postCanDoiKeToan('/CuoiKyTaiKhoan', 
+      { TU_NGAY:this.getNowUTC(this.fromDate), 
+        DEN_NGAY : this.getNowUTC(this.toDate), 
+        ID_DV:1  ,
+        ID_DT:0    ,
+        MA_TK : this.ma_tk
+
+      }).toPromise();
+      this.nocuoiky = response.CKN;
+    } catch (error) {
+      console.error('An error occurred:', error); 
+    }
  
   }
 
@@ -79,7 +143,12 @@ export class SoQuyTienMatComponent implements OnInit {
       queryParams: {
         'fromDate':this.fromDate.toISOString().slice(0, 10),
         'toDate':this.toDate.toISOString().slice(0, 10),
-        'nametable': this.nametable
+        'nametable': this.nametable,
+        'nodauky': this.nodauky,
+        'nocuoiky': this.nocuoiky,
+        "psco": this.psco,
+        "psno": this.psno,
+        'showDiv': this.showDiv
       } ,
       state: {
         chungtus: this.nhapkhos
@@ -94,6 +163,9 @@ export class SoQuyTienMatComponent implements OnInit {
       .reduce((sum, chungtu) => sum + chungtu[field], 0);
 }
 
+public calculateTotalPsco() {
+  this.psco = this.nhapkhos.reduce((sum, nhapkho) => sum + nhapkho.PS_CO, 0);
+}
 
 
   onValueChangeDateRange(rangeDate) {

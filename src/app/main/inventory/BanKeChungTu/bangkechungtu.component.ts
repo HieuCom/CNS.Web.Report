@@ -14,6 +14,8 @@ import { ColuminfoService } from 'src/app/core/services/columinfo.service';
 })
 export class BangKeChungTuComponent implements OnInit {
 
+  showDiv: boolean = false; 
+
   @ViewChild('modalAddEdit', { static: false }) public modalAddEdit: ModalDirective;
   @ViewChild('dateRangeSection') dateRangeSection: ElementRef; 
   
@@ -65,7 +67,8 @@ export class BangKeChungTuComponent implements OnInit {
       const response: any = await this.dataService.postCanDoiKeToan('/BangKeChungTu', 
       { TU_NGAY:this.getNowUTC(this.fromDate),
          DEN_NGAY : this.getNowUTC(this.toDate), 
-         MA_TK : this.ma_tk
+         MA_TK : this.ma_tk,
+         
 
       }).toPromise();
       this.nhapkhos = response;
@@ -82,7 +85,8 @@ export class BangKeChungTuComponent implements OnInit {
       queryParams: {
         'fromDate':this.fromDate.toISOString().slice(0, 10),
         'toDate':this.toDate.toISOString().slice(0, 10),
-        'nametable': this.nametable
+        'nametable': this.nametable,
+       'show': this.showDiv
       } ,
       state: {
         chungtus: this.nhapkhos

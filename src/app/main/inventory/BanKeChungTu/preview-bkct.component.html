@@ -18,23 +18,20 @@
     
     </div>
   
+  
     <!-- <div [innerHTML]="safeHtml"></div> -->
     <div class="table-responsive">
       <h2 class="nametb" >{{this.nametable}}</h2>
       <h4 class="nametb" >Tài khoản:{{this.ma_tk}}</h4>
       <p class="time" >Từ ngày:{{ this.fromDate.split('-').reverse().join('/') }} đến ngày: {{ this.toDate.split('-').reverse().join('/') }} </p>
-      <!--   
-      <div class="caption" > 
-        <div class="total"  >Tổng cộng</div>
-        <div  >327.000.000</div>
-        <div >1.327.000.000</div>
-        <div >327.000.000</div>
-        <div>327.000.000</div>
-      </div> -->
-      
+      <div *ngIf="showDiv" class="account" >
+        <div>Dư nợ đầu ngày:{{this.nodauky | number}}</div>
+        <div>Phát sinh nợ: {{this.psno|number}}</div>
+        <div>Phát sinh có: {{this.psco|number}}</div>
+        <div>Dư nợ cuối ngày:{{this.nocuoiky | number}}</div>
+       </div>
       <table class="table table-bordered">
       
-        <!-- <thead [innerHTML]="headHtml" > -->
           <thead > 
           <tr>
             <th rowspan="2" class="small-column">
@@ -124,7 +121,7 @@
       </div>
       <div class="undersecretary">
         <p  >
-          <strong>THỦ TRƯỞNG ĐƠN VỊ</strong>
+          <strong>GIÁM ĐỐC</strong>
         </p>
         <p  >
           <strong>(Ký, họ tên)</strong>
